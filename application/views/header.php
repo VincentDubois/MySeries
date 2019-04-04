@@ -14,7 +14,8 @@ $this->load->helper(['url','html']); ?>
 <body>
   <header class="navbar bg-primary">
   <section class="navbar-section">
-    <a href="#" class="navbar-brand mr-2 text-secondary">Mes Séries</a>
+    <a href="<?php echo site_url(); ?>"
+       class="navbar-brand mr-2 px-2 text-secondary">Mes Séries</a>
     <a href="#" class="btn btn-primary">Calendrier</a>
     <a href="#" class="btn btn-primary">Rechercher</a>
   </section>

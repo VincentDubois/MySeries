@@ -14,4 +14,9 @@ class Serie extends CI_Model {
     $query = $this->my_queries->query('get_all_series', ['limit' => $limit]);
     return $query->result();
   }
+
+  public function get($id){
+    $query = $this->my_queries->query('get_serie', ['id' => $id]);
+    return $query->first_row();
+  }
 }

@@ -8,7 +8,7 @@ $this->load->helper(['url','html']); ?>
    <div class="columns">
     <?php foreach ($serie_list as $serie): ?>
       <div class="column col-2 col-xs-12 col-sm-6 col-md-4 col-lg-3">
-        <a href="#" class="panel my-2 hover-up">
+        <a href="<?php echo site_url('serie/'.$serie->id); ?>" class="panel my-2 hover-up">
           <div class="panel-image">
             <img src="<?php echo $serie->urlImage; ?>" class="img-responsive p-centered">
           </div>

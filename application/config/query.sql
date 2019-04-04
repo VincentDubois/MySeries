@@ -49,3 +49,13 @@ INSERT INTO user(email,password,lastVisit)
 SELECT * FROM serie
 ORDER BY premiere DESC
 LIMIT :limit;
+
+### get_serie
+# Obtient toutes les informations sur une série
+#
+#
+# Paramètre
+#    :id
+
+SELECT * from serie
+WHERE id=:id;
