@@ -24,7 +24,7 @@ class User extends CI_Model {
     $last = NULL;
     if ($query->num_rows()== 0){
       $this->my_queries->query('register_user', $_POST);
-      $userId = $this->common_model->insert_id();
+      $userId = $this->my_queries->insert_id();
     } else if ($query->first_row()->password == $password){
       $userId = $query->first_row()->id;
       $last = $query->first_row()->lastVisit;
