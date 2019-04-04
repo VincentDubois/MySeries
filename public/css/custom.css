@@ -5,3 +5,17 @@
   width: 100%;
   margin: 0;
 }
+
+.hover-up {
+  transition: transform 0.5s, background 0.5s;
+  background: #303742 !important;
+  color: #fff;
+  flex-grow: 1;
+}
+
+.hover-up:hover {
+  transform: translate(0px, -15px);
+  background: #5755d9 !important;
+
+  text-decoration: none;
+}
