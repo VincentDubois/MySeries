@@ -19,4 +19,9 @@ class Serie extends CI_Model {
     $query = $this->my_queries->query('get_serie', ['id' => $id]);
     return $query->first_row();
   }
+
+  public function get_cast($id){
+    $query = $this->my_queries->query('get_cast', ['id' => $id]);
+    return $query->result();
+  }
 }

@@ -57,5 +57,17 @@ LIMIT :limit;
 # Paramètre
 #    :id
 
-SELECT * from serie
+SELECT * FROM serie
 WHERE id=:id;
+
+### get_cast
+# Obtient les paires rôles/acteurs pour une série données
+#
+# Paramètre
+#    :id
+
+SELECT personnage.urlImage AS p_image,personnage.nom AS p_nom,
+       personne.id AS a_id, personne.nom AS a_nom FROM jouer
+JOIN personnage ON jouer.idPersonnage = personnage.id
+JOIN personne ON jouer.idPersonne = personne.id
+WHERE idSerie=:id;
