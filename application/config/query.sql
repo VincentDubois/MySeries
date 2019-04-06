@@ -81,4 +81,15 @@ WHERE idSerie=:id;
 SELECT saison, MAX(numero) AS nb, MIN(premiere) AS debut, MAX(premiere) AS fin
 FROM episode
 WHERE idSerie=:id
-GROUP BY saison;
+GROUP BY saison
+ORDER BY saison;
+
+### get_episode_list
+# Obtient la liste des episodes pour une série donnée
+#
+# Paramètre
+#    :id
+
+SELECT * FROM episode
+WHERE idSerie=:id AND saison=:saison
+ORDER BY saison,numero;

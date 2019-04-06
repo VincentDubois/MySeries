@@ -29,4 +29,10 @@ class Serie extends CI_Model {
     $query = $this->my_queries->query('get_season_list', ['id' => $id]);
     return $query->result();
   }
+
+  public function get_episode_list($id,$saison){
+    $query = $this->my_queries->query('get_episode_list', ['id' => $id, 'saison' => $saison]);
+    return $query->result();
+  }
+
 }

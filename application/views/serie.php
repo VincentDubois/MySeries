@@ -21,24 +21,47 @@ $this->load->helper(['url','html']);?>
           </div>
 
   <div class="panel-body column p-2 col-12 ">
+
+    <ul class="pagination">
+  <li class="page-item <?php $previous=$saison-1; if ($previous<1) echo 'disabled';?>">
+    <a href="<?php echo site_url('serie/'.$serie->id.'/'.$previous); ?>">Précédente</a>
+  </li>
+   <?php foreach($season as $element): ?>
+  <li class="page-item <?php echo ($element->saison==$saison) ? 'active':'';?>">
+    <a href="<?php echo site_url('serie/'.$serie->id.'/'.$element->saison); ?>"><?php echo $element->saison; ?></a>
+  </li>
+  <?php endforeach; ?>
+  <li class="page-item <?php $next=$saison+1; if ($next>count($season)) echo 'disabled'?>">
+    <a href="<?php echo site_url('serie/'.$serie->id.'/'.$next); ?>">Suivante</a>
+  </li>
+</ul>
+
    <div class="timeline text-dark">
-       <?php foreach($season as $element): ?>
+       <?php foreach($episode as $element): ?>
                   <div class="timeline-item">
-                    <div class="timeline-left"><a class="timeline-icon icon-lg" href="#"><i class="icon icon-plus"></i></a></div>
+                    <div class="timeline-left"><a class="timeline-icon icon-lg" href="#"><i class="icon icon-arrow-right"></i></a></div>
                     <div class="timeline-content">
                       <div class="tile bg-gray p-2 m-1">
-                        <div class="tile-content">
-                          <p class="tile-subtitle h5 text-primary">
-                            <?php echo date("Y",strtotime($element->debut)). " : Saison ". $element->saison ." ( ". $element->nb. " épisodes ) ";?></p>
-                          <p class="tile-title"><?php   echo "Du " . date("d/m/Y",strtotime($element->debut)); ?></p>
-                          <p class="tile-title"><?php   echo "Au " . date("d/m/Y",strtotime($element->fin)); ?></p>
-                        </div>
-                        <div class="tile-action">
-                          <button class="btn">Détail</button>
+                        <div class="tile-content p-2">
+                          <p class="tile-title">
+                            <span class="h5 text-primary">
+                            <?php echo $element->nom;?> </span>
+                            <span class="h6 text-gray">
+                            <?php echo "Episode n°". $element->numero . ", diffusé le " . date("d/m/Y",strtotime($element->premiere)) ;?>
+                            </span>
+                          </p>
+                          <div class="columns">
+                          <div class="col-7">
+                            <p class="text-justify"><?php echo $element->resume ?></p>
+                          </div>
+                          <div class="col-5">
+                             <img src="<?php echo $element->urlImage; ?>" class="img-responsive">
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
+                </div>
         <?php endforeach; ?>
 </div>
 </div>
