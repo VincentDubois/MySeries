@@ -12,6 +12,7 @@ class Show extends CI_Controller {
 
 		$data['serie'] = $this->serie->get($id_serie);
 		$data['cast'] = $this->serie->get_cast($id_serie);
+		$data['season'] = $this->serie->get_season_list($id_serie);
 
 
     $this->load->view('header',$data);

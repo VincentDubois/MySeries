@@ -24,4 +24,9 @@ class Serie extends CI_Model {
     $query = $this->my_queries->query('get_cast', ['id' => $id]);
     return $query->result();
   }
+
+  public function get_season_list($id){
+    $query = $this->my_queries->query('get_season_list', ['id' => $id]);
+    return $query->result();
+  }
 }

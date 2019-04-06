@@ -61,7 +61,7 @@ SELECT * FROM serie
 WHERE id=:id;
 
 ### get_cast
-# Obtient les paires rôles/acteurs pour une série données
+# Obtient les paires rôles/acteurs pour une série donnée
 #
 # Paramètre
 #    :id
@@ -71,3 +71,14 @@ SELECT personnage.urlImage AS p_image,personnage.nom AS p_nom,
 JOIN personnage ON jouer.idPersonnage = personnage.id
 JOIN personne ON jouer.idPersonne = personne.id
 WHERE idSerie=:id;
+
+### get_season_list
+# Obtient la liste des saisons pour une série donnée
+#
+# Paramètre
+#    :id
+
+SELECT saison, MAX(numero) AS nb, MIN(premiere) AS debut, MAX(premiere) AS fin
+FROM episode
+WHERE idSerie=:id
+GROUP BY saison;

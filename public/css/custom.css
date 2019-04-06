@@ -19,7 +19,7 @@
   text-decoration: none;
 }
 
-img.resize {
+.img.resize {
     width:120px;
     height: auto;
 }

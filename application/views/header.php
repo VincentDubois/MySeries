@@ -5,9 +5,10 @@ $this->load->helper(['url','html']); ?>
 <html>
 <head>
     <meta charset="utf-8">
-    <title>My Blog</title>
+    <title>My Series</title>
     <?php echo link_tag('public/css/spectre.min.css'); ?>
-    <?php echo link_tag('public/css/spectre-icons.css'); ?>
+    <?php echo link_tag('public/css/spectre-icons.min.css'); ?>
+    <?php echo link_tag('public/css/spectre-exp.min.css'); ?>
     <?php echo link_tag('public/css/custom.css'); ?>
 
 </head>

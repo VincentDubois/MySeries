@@ -11,15 +11,40 @@ $this->load->helper(['url','html']);?>
             <img src="<?php echo $serie->urlImage; ?>" class="img-responsive p-centered">
           </div>
           <div class="panel-body column p-2 col-7">
+            <div class="bg-gray p-1 m-1">
             <div class="panel-title h5 text-center text-primary">
               <?php echo $serie->nom.' ('.substr($serie->premiere,0,4).')'; ?></div>
-            <p class="text-dark text-justify">
+            <p class="text-dark text-justify bg-gray">
               <?php echo $serie->resume; ?>
             </p>
           </div>
-        </div>
-   </div>
-  </div>
+          </div>
+
+  <div class="panel-body column p-2 col-12 ">
+   <div class="timeline text-dark">
+       <?php foreach($season as $element): ?>
+                  <div class="timeline-item">
+                    <div class="timeline-left"><a class="timeline-icon icon-lg" href="#"><i class="icon icon-plus"></i></a></div>
+                    <div class="timeline-content">
+                      <div class="tile bg-gray p-2 m-1">
+                        <div class="tile-content">
+                          <p class="tile-subtitle h5 text-primary">
+                            <?php echo date("Y",strtotime($element->debut)). " : Saison ". $element->saison ." ( ". $element->nb. " épisodes ) ";?></p>
+                          <p class="tile-title"><?php   echo "Du " . date("d/m/Y",strtotime($element->debut)); ?></p>
+                          <p class="tile-title"><?php   echo "Au " . date("d/m/Y",strtotime($element->fin)); ?></p>
+                        </div>
+                        <div class="tile-action">
+                          <button class="btn">Détail</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+        <?php endforeach; ?>
+</div>
+</div>
+</div>
+</div>
+</div>
 
   <div class="column col-4">
      <div class="columns col-gapless py-2">
