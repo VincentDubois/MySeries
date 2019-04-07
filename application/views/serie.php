@@ -45,7 +45,8 @@ $this->load->helper(['url','html','image_cache']);?>
    <div class="timeline panel-body text-dark py-2">
        <?php foreach($episode as $element): ?>
                   <div class="timeline-item">
-                    <div class="timeline-left"><a class="timeline-icon icon-lg" href="#"><i class="icon icon-arrow-right"></i></a></div>
+                    <div class="timeline-left">
+                      <a class="timeline-icon icon-lg" href="#"><?=$element->numero?></a></div>
                     <div class="timeline-content">
                       <div class="tile">
                         <div class="tile-content">
@@ -53,7 +54,7 @@ $this->load->helper(['url','html','image_cache']);?>
                             <span class="h5 text-primary">
                             <?php echo $element->nom;?> </span>
                             <span class="h6 text-gray">
-                            <?php echo "Episode n°". $element->numero . ", diffusé le " . date("d/m/Y",strtotime($element->premiere)) ;?>
+                            <?php echo "Diffusion le " . date("d/m/Y",strtotime($element->premiere)) ;?>
                             </span>
                           </p>
                           <div class="tile-subtitle columns bg-gray">
