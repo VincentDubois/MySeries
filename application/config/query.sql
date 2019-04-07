@@ -93,3 +93,13 @@ ORDER BY saison;
 SELECT * FROM episode
 WHERE idSerie=:id AND saison=:saison
 ORDER BY saison,numero;
+
+### get_crew_list
+# Obtient la liste des membres de l équipe de tournage
+#
+# Paramètre
+#    :id
+
+SELECT * FROM poste
+JOIN personne ON personne.id = poste.idPersonne
+WHERE idSerie=:id;

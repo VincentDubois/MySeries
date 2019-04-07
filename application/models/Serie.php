@@ -35,4 +35,9 @@ class Serie extends CI_Model {
     return $query->result();
   }
 
+  public function get_crew_list($id){
+    $query = $this->my_queries->query('get_crew_list', ['id' => $id]);
+    return $query->result();
+  }
+
 }

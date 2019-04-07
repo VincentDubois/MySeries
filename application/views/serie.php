@@ -1,11 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $this->load->helper(['url','html','image_cache']);?>
-
 <div class="container">
    <div class="columns col-oneline col-gapless">
       <div class="column col-8 p-2">
-        <div class="panel m-2 bg-secondary">
+        <div class="panel bg-secondary">
           <div class="columns col-gapless">
           <div class="panel-image column col-5 p-2">
             <img <?php cache_src($serie->urlImage);?> class="img-responsive p-centered">
@@ -19,11 +18,8 @@ $this->load->helper(['url','html','image_cache']);?>
             </p>
           </div>
           </div>
-
   </div>
-
     <div class="panel-nav p-centered">
-
     <ul class="pagination">
   <li class="page-item <?php $previous=$saison-1; if ($previous<1) echo 'disabled';?>">
     <a href="<?php echo site_url('serie/'.$serie->id.'/'.$previous); ?>">Précédente</a>
@@ -38,10 +34,8 @@ $this->load->helper(['url','html','image_cache']);?>
   </li>
 </ul>
 </div>
-
-<div class="panel-title h5 bg-primary p-2 m-2">Saison <?=$saison?> <span class="h6 text-gray">
+<div class="panel-title label h5 label-rounded label-primary p-2 m-2"> Saison <?=$saison?> <span class="h6 text-gray">
   <?=substr($episode[0]->premiere,0,4) ?>  (<?=count($episode)?> episodes)</span></div>
-
    <div class="timeline panel-body text-dark py-2">
        <?php foreach($episode as $element): ?>
                   <div class="timeline-item">
@@ -73,23 +67,32 @@ $this->load->helper(['url','html','image_cache']);?>
 </div>
 </div>
 </div>
-
-
-
-  <div class="column col-4">
-     <div class="columns col-gapless py-2">
+  <div class="column col-4 p-2">
+    <div class="panel container bg-secondary my-2">
+     <div class="columns">
       <?php foreach ($cast as $element): ?>
-          <div class="popover popover-left column col-3 col-xs-12 col-sm-6 col-md-4 col-lg-3">
-            <img <?php cache_src($element->p_image); ?> class="img-responsive p-centered p-2">
+          <div class="panel-image column col-3 col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2">
+          <div class="popover popover-left">
+            <img <?php cache_src($element->p_image); ?> class="img-responsive p-centered">
           <div class="popover-container">
           <div class="btn-group float-right">
             <a class="btn btn-primary" href="<?php echo site_url('personne/'.$element->a_id); ?>">
               <?php echo $element->p_nom; ?></a>
             <a class="btn " href="#"><?php echo $element->a_nom; ?></a>
-    </div></div></div>
+    </div>
+  </div>
+</div>
+</div>
     <?php endforeach; ?>
 </div>
+<div class="panel-action py-2">
+    <?php foreach ($crew as $element): ?>
+      <div class="btn-group btn-group my-2 col-12">
+        <a href="#" class="btn btn-primary disabled"><?=$element->titre?></a>
+        <a href="#" class="btn btn-secondary"><?=$element->nom?></a>
+      </div>
+    <?php endforeach; ?>
+
 </div>
 </div>
-  </div>
- </div>
+  </div></div>
