@@ -7,7 +7,7 @@ $this->load->helper(['url','html','image_cache']);?>
       <div class="column col-8 p-2">
         <div class="panel m-2 bg-secondary">
           <div class="columns col-gapless">
-          <div class="panel-image column col-5">
+          <div class="panel-image column col-5 p-2">
             <img <?php cache_src($serie->urlImage);?> class="img-responsive p-centered">
           </div>
           <div class="panel-body column p-2 col-7">
@@ -20,7 +20,9 @@ $this->load->helper(['url','html','image_cache']);?>
           </div>
           </div>
 
-  <div class="panel-body column p-2 col-12 ">
+  </div>
+
+    <div class="panel-nav p-centered">
 
     <ul class="pagination">
   <li class="page-item <?php $previous=$saison-1; if ($previous<1) echo 'disabled';?>">
@@ -35,14 +37,18 @@ $this->load->helper(['url','html','image_cache']);?>
     <a href="<?php echo site_url('serie/'.$serie->id.'/'.$next); ?>">Suivante</a>
   </li>
 </ul>
+</div>
 
-   <div class="timeline text-dark">
+<div class="panel-title h5 bg-primary p-2 m-2">Saison <?=$saison?> <span class="h6 text-gray">
+  <?=substr($episode[0]->premiere,0,4) ?>  (<?=count($episode)?> episodes)</span></div>
+
+   <div class="timeline panel-body text-dark py-2">
        <?php foreach($episode as $element): ?>
                   <div class="timeline-item">
                     <div class="timeline-left"><a class="timeline-icon icon-lg" href="#"><i class="icon icon-arrow-right"></i></a></div>
                     <div class="timeline-content">
-                      <div class="tile bg-gray p-2 m-1">
-                        <div class="tile-content p-2">
+                      <div class="tile">
+                        <div class="tile-content">
                           <p class="tile-title">
                             <span class="h5 text-primary">
                             <?php echo $element->nom;?> </span>
@@ -50,12 +56,12 @@ $this->load->helper(['url','html','image_cache']);?>
                             <?php echo "Episode n°". $element->numero . ", diffusé le " . date("d/m/Y",strtotime($element->premiere)) ;?>
                             </span>
                           </p>
-                          <div class="columns">
-                          <div class="col-7">
+                          <div class="tile-subtitle columns bg-gray">
+                          <div class="col-7 p-2">
                             <p class="text-justify"><?php echo $element->resume ?></p>
                           </div>
-                          <div class="col-5">
-                             <img <?php cache_src($element->urlImage); ?> class="img-responsive">
+                          <div class="col-5 flex-centered">
+                             <img <?php cache_src($element->urlImage); ?> class="img-responsive p-2">
                           </div>
                         </div>
                       </div>
@@ -66,8 +72,8 @@ $this->load->helper(['url','html','image_cache']);?>
 </div>
 </div>
 </div>
-</div>
-</div>
+
+
 
   <div class="column col-4">
      <div class="columns col-gapless py-2">
