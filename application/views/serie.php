@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$this->load->helper(['url','html']);?>
+$this->load->helper(['url','html','image_cache']);?>
 
 <div class="container">
    <div class="columns col-oneline col-gapless">
@@ -8,12 +8,12 @@ $this->load->helper(['url','html']);?>
         <div class="panel m-2 bg-secondary">
           <div class="columns col-gapless">
           <div class="panel-image column col-5">
-            <img src="<?php echo $serie->urlImage; ?>" class="img-responsive p-centered">
+            <img <?php cache_src($serie->urlImage);?> class="img-responsive p-centered">
           </div>
           <div class="panel-body column p-2 col-7">
             <div class="bg-gray p-1 m-1">
             <div class="panel-title h5 text-center text-primary">
-              <?php echo $serie->nom.' ('.substr($serie->premiere,0,4).')'; ?></div>
+              <?php echo $serie->nom.' <span class="h6 text-gray">('.substr($serie->premiere,0,4).')</span>'; ?></div>
             <p class="text-dark text-justify bg-gray">
               <?php echo $serie->resume; ?>
             </p>
@@ -55,7 +55,7 @@ $this->load->helper(['url','html']);?>
                             <p class="text-justify"><?php echo $element->resume ?></p>
                           </div>
                           <div class="col-5">
-                             <img src="<?php echo $element->urlImage; ?>" class="img-responsive">
+                             <img <?php cache_src($element->urlImage); ?> class="img-responsive">
                           </div>
                         </div>
                       </div>
@@ -73,7 +73,7 @@ $this->load->helper(['url','html']);?>
      <div class="columns col-gapless py-2">
       <?php foreach ($cast as $element): ?>
           <div class="popover popover-left column col-3 col-xs-12 col-sm-6 col-md-4 col-lg-3">
-            <img src="<?php echo $element->p_image; ?>" class="img-responsive p-centered p-2">
+            <img <?php cache_src($element->p_image); ?> class="img-responsive p-centered p-2">
           <div class="popover-container">
           <div class="btn-group float-right">
             <a class="btn btn-primary" href="<?php echo site_url('personne/'.$element->a_id); ?>">
