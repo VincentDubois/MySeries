@@ -24,10 +24,16 @@ $this->load->helper(['url','html','image_cache']);?>
   <li class="page-item <?php $previous=$saison-1; if ($previous<1) echo 'disabled';?>">
     <a href="<?php echo site_url('serie/'.$serie->id.'/'.$previous); ?>">Précédente</a>
   </li>
+    <?php $previous=0; ?>
    <?php foreach($season as $element): ?>
-  <li class="page-item <?php echo ($element->saison==$saison) ? 'active':'';?>">
+     <?php $delta = $element->saison-$saison;?>
+  <?php if($element->saison <2 || ($delta>= -2 && $delta<=2) || $element->saison>count($season)-2): ?>
+    <?php if ($previous+1 != $element->saison) echo '<li class="page-item">...</li>';
+          $previous = $element->saison;?>
+  <li class="page-item <?php echo ($delta==0) ? 'active':'';?>">
     <a href="<?php echo site_url('serie/'.$serie->id.'/'.$element->saison); ?>"><?php echo $element->saison; ?></a>
   </li>
+<?php endif; ?>
   <?php endforeach; ?>
   <li class="page-item <?php $next=$saison+1; if ($next>count($season)) echo 'disabled'?>">
     <a href="<?php echo site_url('serie/'.$serie->id.'/'.$next); ?>">Suivante</a>
