@@ -1,5 +1,5 @@
 <p class="footer bg-secondary text-center">
-  Sité réalisé avec
+  Site réalisé avec
   <?php echo'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' ?>
   et Spectre CSS
 </p>

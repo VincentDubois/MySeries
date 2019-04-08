@@ -79,7 +79,9 @@ $this->load->helper(['url','html','image_cache']);?>
       <?php foreach ($cast as $element): ?>
           <div class="panel-image column col-3 col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2">
           <div class="popover popover-left">
-            <img <?php cache_src($element->p_image); ?> class="img-responsive p-centered">
+            <a href="<?=site_url('personne/'.$element->a_id)?>">
+              <img <?php cache_src($element->p_image); ?> class="img-responsive p-centered">
+            </a>
           <div class="popover-container">
           <div class="btn-group float-right">
             <a class="btn btn-primary" href="<?php echo site_url('personne/'.$element->a_id); ?>">

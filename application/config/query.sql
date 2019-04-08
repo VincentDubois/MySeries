@@ -103,3 +103,25 @@ ORDER BY saison,numero;
 SELECT * FROM poste
 JOIN personne ON personne.id = poste.idPersonne
 WHERE idSerie=:id;
+
+### get_person
+# Obtient les infos d une personne
+#
+# Paramètre
+#    :id
+
+SELECT * FROM personne
+WHERE id=:id;
+
+
+### get_actor_role
+# Obtient les personnage joués ainsi que les séries correspondantes
+#
+# Paramètre
+#    :id
+
+SELECT serie.id AS s_id, serie.nom AS s_nom, serie.urlImage AS s_image,
+      personnage.nom AS p_nom, personnage.urlImage AS p_image FROM jouer
+JOIN personnage ON jouer.idPersonnage=personnage.id
+JOIN serie ON jouer.idSerie = serie.id
+WHERE idPersonne=:id;
