@@ -125,3 +125,14 @@ SELECT serie.id AS s_id, serie.nom AS s_nom, serie.urlImage AS s_image,
 JOIN personnage ON jouer.idPersonnage=personnage.id
 JOIN serie ON jouer.idSerie = serie.id
 WHERE idPersonne=:id;
+
+### get_crew_role
+# Obtient la liste des postes occuppés dans les équipes des Séries
+#
+# Paramètre
+#    :id
+
+SELECT serie.id AS s_id, serie.nom AS s_nom, serie.urlImage AS s_image,
+       titre FROM poste
+JOIN serie ON poste.idSerie = serie.id
+WHERE idPersonne=:id;

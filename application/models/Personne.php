@@ -21,13 +21,26 @@ class Personne extends CI_Model {
     return $query->result_array();
   }
 
+  public function get_crew_role($id){
+    $query = $this->my_queries->query('get_crew_role', ['id' => $id]);
+    return $query->result_array();
+  }
+
   public function get_series($id){
-    $role = $this->get_actor_role($id);
     $result = [];
+
+    $role = $this->get_actor_role($id);
     for($i=0; $i<count($role);$i++){
       if (!isset($result[$role[$i]['s_id']])) $result[$role[$i]['s_id']]=$role[$i];
       $result[$role[$i]['s_id'] ]['character'][] = $role[$i];
     }
+
+    $crew = $this->get_crew_role($id);
+    for($i=0; $i<count($crew);$i++){
+      if (!isset($result[$crew[$i]['s_id']])) $result[$crew[$i]['s_id']]=$crew[$i];
+      $result[$crew[$i]['s_id'] ]['crew'][] = $crew[$i];
+    }
+
 
     return $result;
   }

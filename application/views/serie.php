@@ -86,7 +86,7 @@ $this->load->helper(['url','html','image_cache']);?>
           <div class="btn-group float-right">
             <a class="btn btn-primary" href="<?php echo site_url('personne/'.$element->a_id); ?>">
               <?php echo $element->p_nom; ?></a>
-            <a class="btn " href="#"><?php echo $element->a_nom; ?></a>
+            <a class="btn " href="<?=site_url('personne/'.$element->a_id)?>"><?php echo $element->a_nom; ?></a>
     </div>
   </div>
 </div>
@@ -97,7 +97,7 @@ $this->load->helper(['url','html','image_cache']);?>
     <?php foreach ($crew as $element): ?>
       <div class="btn-group btn-group my-2 col-12">
         <a href="#" class="btn btn-primary disabled"><?=$element->titre?></a>
-        <a href="#" class="btn btn-secondary"><?=$element->nom?></a>
+        <a href="<?=site_url('personne/'.$element->id)?>"" class="btn btn-secondary"><?=$element->nom?></a>
       </div>
     <?php endforeach; ?>
 

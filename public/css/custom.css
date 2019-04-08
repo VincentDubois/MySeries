@@ -8,8 +8,6 @@
 
 .hover-up {
   transition: transform 0.5s, background 0.5s;
-  background: #303742 !important;
-  color: #fff;
 }
 
 .hover-up:hover {
