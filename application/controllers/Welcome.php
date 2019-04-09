@@ -25,7 +25,6 @@ class Welcome extends CI_Controller {
 		$data=$this->user->get_logged_user();
 		$lastVisit = isset($data['lastVisit']) ? $data['lastVisit'] : NULL;
 		if ($lastVisit==NULL || $lastVisit=='') $lastVisit=date('Y-m-d',strtotime('-7 day'));
-		echo $lastVisit;
 		$data['serie_list'] = $this->serie->get_all(30,$lastVisit);
 
 		$this->load->view('header',$data);
