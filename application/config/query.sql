@@ -34,6 +34,17 @@ SELECT id,password,lastVisit FROM user
 INSERT INTO user(email,password,lastVisit)
   VALUES (:email,:password,CURDATE());
 
+### update_visit
+#
+#
+# Paramètres
+#    :id
+
+UPDATE user
+SET lastVisit=CURDATE()
+WHERE id=:id;
+
+
 
 ### get_all_series
 # Obtient les images de toutes les séries.
@@ -44,10 +55,15 @@ INSERT INTO user(email,password,lastVisit)
 #
 # Paramètre
 #   :limit
+#   :lastVisit
 #
 
-SELECT * FROM serie
-ORDER BY premiere DESC
+SELECT serie.*,
+  SUM(IF(episode.premiere>=:lastVisit AND episode.premiere<=CURDATE(),1,0)) AS new
+FROM serie
+JOIN episode ON episode.idSerie = serie.id
+GROUP BY serie.id
+ORDER BY new DESC,serie.premiere DESC
 LIMIT :limit;
 
 ### get_serie

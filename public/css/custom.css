@@ -21,3 +21,21 @@
     width:120px;
     height: auto;
 }
+
+.my-badge {
+   position:relative;
+}
+.my-badge[data-badge]:after {
+   content:attr(data-badge);
+   position:absolute;
+   top:-7px;
+   right:-7px;
+   font-size:.7em;
+   background: #5755d9;
+   color:white;
+   width:20px;height:20px;
+   text-align:center;
+   line-height:20px;
+   border-radius:50%;
+   box-shadow:0 0 1px #333;
+}

@@ -28,12 +28,13 @@ class User extends CI_Model {
     } else if ($query->first_row()->password == $password){
       $userId = $query->first_row()->id;
       $last = $query->first_row()->lastVisit;
+      $this->my_queries->query('update_visit', ['id'=>$userId]);
     }
 
     if ($userId != -1){
       $this->session->set_userdata('userId', $userId);
       $this->session->set_userdata('email',$email);
-      if ($last != NULL) $this->session->set_userdata('last', $last);
+      $this->session->set_userdata('lastVisit',$last);
     }
   }
 
@@ -50,6 +51,7 @@ class User extends CI_Model {
       $data = [];
       $data['id'] = $this->session->userId;
       $data['email'] = $this->session->email;
+      $data['lastVisit'] = $this->session->lastVisit;
       return $data;
     } else {
       return [];

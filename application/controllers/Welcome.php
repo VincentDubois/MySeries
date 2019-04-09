@@ -23,7 +23,10 @@ class Welcome extends CI_Controller {
 		$this->load->model('user');
 		$this->load->model('serie');
 		$data=$this->user->get_logged_user();
-		$data['serie_list'] = $this->serie->get_all(30);
+		$lastVisit = isset($data['lastVisit']) ? $data['lastVisit'] : NULL;
+		if ($lastVisit==NULL || $lastVisit=='') $lastVisit=date('Y-m-d',strtotime('-7 day'));
+		echo $lastVisit;
+		$data['serie_list'] = $this->serie->get_all(30,$lastVisit);
 
 		$this->load->view('header',$data);
 //		$this->load->view('welcome_message');

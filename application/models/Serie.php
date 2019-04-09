@@ -10,8 +10,8 @@ class Serie extends CI_Model {
       $this->load->library('my_queries');
   }
 
-  public function get_all($limit){
-    $query = $this->my_queries->query('get_all_series', ['limit' => $limit]);
+  public function get_all($limit,$last){
+    $query = $this->my_queries->query('get_all_series', ['limit' => $limit, 'lastVisit' => $last]);
     return $query->result();
   }
 
