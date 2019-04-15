@@ -10,6 +10,10 @@ class Show extends CI_Controller {
     $this->load->model('serie');
 	  $data=$this->user->get_logged_user();
 
+		if(isset($_POST['follow'])){
+			$this->user->follow($_POST['follow'],$id_serie);
+		}
+
 		$data['serie'] = $this->serie->get($id_serie);
 		$data['cast'] = $this->serie->get_cast($id_serie);
 		$data['crew'] = $this->serie->get_crew_list($id_serie);

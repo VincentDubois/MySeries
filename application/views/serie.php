@@ -12,7 +12,17 @@ $this->load->helper(['url','html','image_cache']);?>
           <div class="panel-body column p-2 col-7">
             <div class="bg-gray p-1 m-1">
             <div class="panel-title h5 text-center text-primary">
-              <?php echo $serie->nom.' <span class="h6 text-gray">('.substr($serie->premiere,0,4).')</span>'; ?></div>
+              <?php if (isset($id)): ?>
+                <form action="<?php echo site_url('serie/'.$serie->id.'/'.$saison); ?>" method="post">
+                  <button action="submit" name="follow" value="<?= $serie->follow ? 'false' : 'true' ?>"
+                       class="btn btn-action s-circle">
+                    <i class="icon <?= $serie->follow ? 'icon-cross' : 'icon-plus' ?>"></i></button>
+                  <?php echo $serie->nom.' <span class="h6 text-gray">('.substr($serie->premiere,0,4).')</span>'; ?></div>
+                </form>
+              <?php else:?>
+                <?php echo $serie->nom.' <span class="h6 text-gray">('.substr($serie->premiere,0,4).')</span>'; ?></div>
+              <?php endif;?>
+
             <p class="text-dark text-justify bg-gray">
               <?php echo $serie->resume; ?>
             </p>

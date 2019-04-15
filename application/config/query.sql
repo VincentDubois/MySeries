@@ -152,3 +152,32 @@ SELECT serie.id AS s_id, serie.nom AS s_nom, serie.urlImage AS s_image,
        titre FROM poste
 JOIN serie ON poste.idSerie = serie.id
 WHERE idPersonne=:id;
+
+### follow
+# Indique qu un utilisateur suit une serie
+#
+# Paramètres
+#   :idUser
+#   :idSerie
+
+INSERT INTO suivre(idUser,idSerie) VALUES (:idUser,:idSerie);
+
+### unfollow
+# Indique qu un utilisateur ne suit plus une serie
+#
+# Paramètres
+#   :idUser
+#   :idSerie
+
+DELETE FROM suivre
+WHERE idUser=:idUser AND idSerie=idSerie;
+
+### isFollowing
+# Indique si un utilisateur suit une série
+#
+# Paramètres
+#   :idUser
+#   :idSerie
+
+SELECT * FROM suivre
+WHERE idUser=:idUser AND idSerie=:idSerie;

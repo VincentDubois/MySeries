@@ -8,6 +8,7 @@ class Serie extends CI_Model {
       parent::__construct();
       $this->load->library('session');
       $this->load->library('my_queries');
+      $this->load->model('user');
   }
 
   public function get_all($limit,$last){
@@ -17,7 +18,13 @@ class Serie extends CI_Model {
 
   public function get($id){
     $query = $this->my_queries->query('get_serie', ['id' => $id]);
-    return $query->first_row();
+    $result = $query->first_row();
+    if ($this->user->is_logged()){
+      $query = $this->my_queries->query('isFollowing',
+        ['idUser'=>$this->session->userId ,'idSerie' => $id]);
+      $result->follow = $query->num_rows()>0;
+    }
+    return $result;
   }
 
   public function get_cast($id){

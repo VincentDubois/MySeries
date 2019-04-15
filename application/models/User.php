@@ -58,4 +58,11 @@ class User extends CI_Model {
     }
   }
 
+  public function follow($value,$idSerie){
+    //print_r(_SESSION);
+    if (!$this->is_logged()) return;
+    $this->my_queries->query(($value == "true" ? 'follow' : 'unfollow'),
+        ['idUser' =>$this->session->userId, 'idSerie'=>$idSerie]);
+  }
+
 }
