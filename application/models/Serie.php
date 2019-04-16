@@ -16,6 +16,12 @@ class Serie extends CI_Model {
     return $query->result();
   }
 
+  public function get_all_followed(){
+    $query = $this->my_queries->query('get_all_followed_series', $_SESSION);
+    return $query->result();
+  }
+
+
   public function get($id){
     $query = $this->my_queries->query('get_serie', ['id' => $id]);
     $result = $query->first_row();

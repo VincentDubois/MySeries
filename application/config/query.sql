@@ -181,3 +181,19 @@ WHERE idUser=:idUser AND idSerie=idSerie;
 
 SELECT * FROM suivre
 WHERE idUser=:idUser AND idSerie=:idSerie;
+
+### get_all_followed_series
+# Obtient les images de toutes les séries suivies.
+# On triera les séries par age décroissant, et on retourne toutes les données
+#
+# Utilisation
+#   Les séries retournées sont affichées sur la page de profil
+#
+# Paramètre
+#   :userId
+#
+
+SELECT * FROM serie
+JOIN suivre ON suivre.idSerie=serie.id
+WHERE suivre.idUser = :userId
+ORDER BY serie.premiere DESC;
