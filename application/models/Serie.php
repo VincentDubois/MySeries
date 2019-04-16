@@ -16,9 +16,26 @@ class Serie extends CI_Model {
     return $query->result();
   }
 
-  public function get_all_followed(){
-    $query = $this->my_queries->query('get_all_followed_series', $_SESSION);
-    return $query->result();
+
+  public function watched($idEpisode){
+    $query = $this->my_queries->query('watched',
+     ['idUser'=>$_SESSION['userId'],  'idEpisode' => $idEpisode]);
+  }
+
+  public function get_followed(){
+    $query = $this->my_queries->query('get_followed_series', $_SESSION);
+    $series = $query->result_array();
+    $result = [];
+    for($i=0;$i<count($series);$i++){
+      $result[$series[$i]['id']] = $series[$i];
+    }
+
+    $query = $this->my_queries->query('get_next_episode', $_SESSION);
+    $episodes = $query->result_array();
+    for($i=0;$i<count($episodes);$i++){
+      $result[$episodes[$i]['idSerie']]['episode'][] = $episodes[$i];
+    }
+    return $result;
   }
 
 

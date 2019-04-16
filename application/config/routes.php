@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['serie/(:num)/(:num)'] = 'show/detail/$1/$2';
 $route['serie/(:num)'] = 'show/detail/$1/1';
 $route['personne/(:num)'] = 'person/detail/$1';
+$route['home/(:num)'] = 'home/vu/$1';
 $route['home'] = 'home';
 
 $route['default_controller'] = 'welcome';

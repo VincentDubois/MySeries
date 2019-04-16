@@ -56,9 +56,9 @@ $this->load->helper(['url','html','image_cache']);?>
        <?php foreach($episode as $element): ?>
                   <div class="timeline-item">
                     <div class="timeline-left">
-                      <a class="timeline-icon icon-lg" href="#"><?=$element->numero?></a></div>
+                      <a class="timeline-icon icon-lg" href="#<?=$element->numero?>"><?=$element->numero?></a></div>
                     <div class="timeline-content">
-                      <div class="tile">
+                      <div class="tile" id="<?=$element->numero?>">
                         <div class="tile-content">
                           <p class="tile-title">
                             <span class="h5 text-primary">

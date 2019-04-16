@@ -182,7 +182,7 @@ WHERE idUser=:idUser AND idSerie=idSerie;
 SELECT * FROM suivre
 WHERE idUser=:idUser AND idSerie=:idSerie;
 
-### get_all_followed_series
+### get_followed_series
 # Obtient les images de toutes les séries suivies.
 # On triera les séries par age décroissant, et on retourne toutes les données
 #
@@ -193,7 +193,36 @@ WHERE idUser=:idUser AND idSerie=:idSerie;
 #   :userId
 #
 
-SELECT * FROM serie
+SELECT serie.* FROM serie
 JOIN suivre ON suivre.idSerie=serie.id
 WHERE suivre.idUser = :userId
 ORDER BY serie.premiere DESC;
+
+### get_next_episode
+# Obtient les infos des episodes non encore vu de chaque série suivie
+# On triera par série,saison et numero.
+#
+# Utilisation
+#   Les épisodes retournées sont affichées sur la page de profil
+#
+# Paramètre
+#   :userId
+#
+
+SELECT episode.* FROM episode
+JOIN suivre ON suivre.idSerie = episode.idSerie
+WHERE suivre.idUser = :userId AND
+  episode.id NOT IN (
+    SELECT vu.idEpisode FROM vu
+    WHERE vu.idUser = :userId
+  )
+ORDER BY episode.idSerie,episode.saison,episode.numero ;
+
+### watched
+# Indique qu un utilisateur a vu un épisode
+#
+# Paramètres
+#   :idUser
+#   :idEpisode
+
+INSERT INTO vu(idUser,idEpisode) VALUES (:idUser,:idEpisode);

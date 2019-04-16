@@ -23,13 +23,20 @@ class Home extends CI_Controller {
 		$this->load->model('user');
 		$this->load->model('serie');
 		$data=$this->user->get_logged_user();
-		$lastVisit = isset($data['lastVisit']) ? $data['lastVisit'] : NULL;
-		if ($lastVisit==NULL || $lastVisit=='') $lastVisit=date('Y-m-d',strtotime('-7 day'));
-		$data['serie_list'] = $this->serie->get_all_followed();
+
+		$data['serie_list'] = $this->serie->get_followed();
 
 		$this->load->view('header',$data);
 		$this->load->view('home',$data);
 		$this->load->view('footer');
 	}
+
+  public function vu($idEpisode)
+  {
+    $this->load->model('serie');
+    $this->serie->watched($idEpisode);
+
+    $this->index();
+  }
 
 }
