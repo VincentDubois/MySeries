@@ -35,18 +35,24 @@ class Welcome extends CI_Controller {
 
 	public function login()
 	{
+		$this->load->helper('url');
 		$this->load->model('user');
-		$this->user->login();
 
-		$this->index();
+		$this->user->login();
+		if ($this->user->is_logged()){
+			redirect('/home/');
+		} else {
+			redirect('/welcome/');
+		}
+
+//		$this->index();
 	}
 
 	public function logout()
 	{
 		$this->load->model('user');
 		$this->user->logout();
-
-		$this->index();
+		redirect('/welcome/');
 	}
 
 }
