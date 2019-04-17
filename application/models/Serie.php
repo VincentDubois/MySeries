@@ -17,10 +17,11 @@ class Serie extends CI_Model {
   }
 
 
-  public function watched($idEpisode){
-    $query = $this->my_queries->query('watched',
+  public function watched($vu, $idEpisode){
+    $query = $this->my_queries->query($vu ? 'watched' : 'unwatched',
      ['idUser'=>$_SESSION['userId'],  'idEpisode' => $idEpisode]);
   }
+
 
   public function get_followed(){
     $query = $this->my_queries->query('get_followed_series', $_SESSION);
@@ -61,7 +62,14 @@ class Serie extends CI_Model {
   }
 
   public function get_episode_list($id,$saison){
-    $query = $this->my_queries->query('get_episode_list', ['id' => $id, 'saison' => $saison]);
+    $data = ['id' => $id, 'saison' => $saison];
+    if ($this->user->is_logged()){
+      $data['userId'] = $_SESSION['userId'];
+      $name ='get_episode_list_vu';
+    } else {
+      $name ='get_episode_list';
+    }
+    $query = $this->my_queries->query($name, $data);
     return $query->result();
   }
 

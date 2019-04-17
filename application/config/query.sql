@@ -229,3 +229,28 @@ ORDER BY episode.idSerie,episode.saison,episode.numero ;
 #   :idEpisode
 
 INSERT INTO vu(idUser,idEpisode) VALUES (:idUser,:idEpisode);
+
+### unwatched
+# Retire un épisode des episodes vus
+#
+# Paramètres
+#   :idUser
+#   :idEpisode
+
+DELETE FROM vu
+WHERE idUser=:idUser AND idEpisode=:idEpisode;
+
+### get_episode_list_vu
+# Obtient la liste des episodes pour une série donnée
+# On retournera aussi pour chaque épisode si il a été vu ou non par l utilisateur
+#
+#
+# Paramètres
+#    :id
+#    :userId
+#    :saison
+
+SELECT episode.*, IF(vu.idUser IS NULL,0,1) AS vu FROM episode
+LEFT JOIN vu ON vu.idEpisode = episode.id AND vu.idUser=:userId
+WHERE idSerie=:id AND saison=:saison
+ORDER BY saison,numero;

@@ -7,7 +7,7 @@ class Show extends CI_Controller {
 	public function detail($id_serie,$saison)
 	{
     $this->load->model('user');
-    $this->load->model('serie');
+		$this->load->model('serie');
 	  $data=$this->user->get_logged_user();
 
 		$data['serie'] = $this->serie->get($id_serie);
@@ -27,6 +27,16 @@ class Show extends CI_Controller {
 		$this->load->model('user');
 		if(isset($_POST['follow'])&& $this->user->is_logged()){
 			$this->user->follow($_POST['follow'],$id_serie);
+		}
+		redirect("serie/$id_serie/$saison");
+	}
+
+	public function vu($id_serie,$saison,$id_episode){
+		$this->load->helper('url');
+		$this->load->model('user');
+		$this->load->model('serie');
+		if($this->user->is_logged()){
+				$this->serie->watched(isset($_POST['vu']),$id_episode);
 		}
 		redirect("serie/$id_serie/$saison");
 	}

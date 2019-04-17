@@ -41,7 +41,7 @@ class Home extends CI_Controller {
 		$this->load->helper('url');
     $this->load->model('serie');
 		if ($this->user->is_logged()){
-    	$this->serie->watched($idEpisode);
+    	$this->serie->watched(true,$idEpisode);
 			redirect('home');
 		} else {
 			redirect('welcome');

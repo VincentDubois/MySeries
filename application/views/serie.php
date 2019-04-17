@@ -61,11 +61,25 @@ $this->load->helper(['url','html','image_cache']);?>
                       <div class="tile" id="<?=$element->numero?>">
                         <div class="tile-content">
                           <p class="tile-title">
+                            <?php if(isset($element->vu)):?>
+                            <form class="form-group mx-2"
+                            action="<?php echo site_url('serie/vu/'.$element->idSerie.'/'.$element->saison.'/'.$element->id.'#'.$element->numero); ?>"
+                            method="post">
+                          <?php endif;?>
                             <span class="h5 text-primary">
                             <?php echo $element->nom;?> </span>
                             <span class="h6 text-gray">
                             <?php echo "Diffusion le " . date("d/m/Y",strtotime($element->premiere)) ;?>
-                            </span>
+                          </span>
+                          <?php if(isset($element->vu)):?>
+                            <label class="form-checkbox float-right">
+                            <input type="checkbox" name="vu"
+                              <?= $element->vu==1 ? 'checked="checked"' :''?>
+                              action="submit" onChange='submit();'>
+                            <i class="form-icon"></i> Vu
+                            </label>
+                            </form>
+                          <?php endif;?>
                           </p>
                           <div class="tile-subtitle columns bg-gray">
                           <div class="col-7 p-2">
