@@ -13,7 +13,7 @@ $this->load->helper(['url','html','image_cache']);?>
             <div class="bg-gray p-1 m-1">
             <div class="panel-title h5 text-center text-primary">
               <?php if (isset($id)): ?>
-                <form action="<?php echo site_url('serie/'.$serie->id.'/'.$saison); ?>" method="post">
+                <form action="<?php echo site_url('serie/follow/'.$serie->id.'/'.$saison); ?>" method="post">
                   <button action="submit" name="follow" value="<?= $serie->follow ? 'false' : 'true' ?>"
                        class="btn btn-action s-circle">
                     <i class="icon <?= $serie->follow ? 'icon-cross' : 'icon-plus' ?>"></i></button>

@@ -20,23 +20,32 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{
+		$this->load->helper('url');
 		$this->load->model('user');
 		$this->load->model('serie');
 		$data=$this->user->get_logged_user();
 
-		$data['serie_list'] = $this->serie->get_followed();
+		if ($this->user->is_logged()){
+			$data['serie_list'] = $this->serie->get_followed();
 
-		$this->load->view('header',$data);
-		$this->load->view('home',$data);
-		$this->load->view('footer');
+			$this->load->view('header',$data);
+			$this->load->view('home',$data);
+			$this->load->view('footer');
+		} else {
+			redirect('welcome');
+		}
 	}
 
   public function vu($idEpisode)
   {
+		$this->load->helper('url');
     $this->load->model('serie');
-    $this->serie->watched($idEpisode);
-
-    $this->index();
+		if ($this->user->is_logged()){
+    	$this->serie->watched($idEpisode);
+			redirect('home');
+		} else {
+			redirect('welcome');
+		}
   }
 
 }

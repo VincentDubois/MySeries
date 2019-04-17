@@ -10,10 +10,6 @@ class Show extends CI_Controller {
     $this->load->model('serie');
 	  $data=$this->user->get_logged_user();
 
-		if(isset($_POST['follow'])){
-			$this->user->follow($_POST['follow'],$id_serie);
-		}
-
 		$data['serie'] = $this->serie->get($id_serie);
 		$data['cast'] = $this->serie->get_cast($id_serie);
 		$data['crew'] = $this->serie->get_crew_list($id_serie);
@@ -24,6 +20,15 @@ class Show extends CI_Controller {
     $this->load->view('header',$data);
 		$this->load->view('serie',$data);
 		$this->load->view('footer');
+	}
+
+	public function follow($id_serie,$saison){
+		$this->load->helper('url');
+		$this->load->model('user');
+		if(isset($_POST['follow'])&& $this->user->is_logged()){
+			$this->user->follow($_POST['follow'],$id_serie);
+		}
+		redirect("serie/$id_serie/$saison");
 	}
 
 
