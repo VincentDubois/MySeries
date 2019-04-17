@@ -193,10 +193,13 @@ WHERE idUser=:idUser AND idSerie=:idSerie;
 #   :userId
 #
 
-SELECT serie.* FROM serie
+SELECT serie.*, COUNT(*) AS total, SUM(IF(vu.idUser IS NULL,1,0)) AS reste FROM serie
 JOIN suivre ON suivre.idSerie=serie.id
+JOIN episode ON episode.idSerie=serie.id
+LEFT JOIN vu ON vu.idEpisode=episode.id AND vu.idUser = suivre.idUser
 WHERE suivre.idUser = :userId
-ORDER BY serie.premiere DESC;
+GROUP BY serie.id
+ORDER BY reste DESC, serie.premiere DESC;
 
 ### get_next_episode
 # Obtient les infos des episodes non encore vu de chaque série suivie

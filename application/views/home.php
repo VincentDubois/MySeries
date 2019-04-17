@@ -12,6 +12,15 @@ $this->load->helper(['url','html','image_cache']); ?>
          <div class="columns col-gapless">
        <a href="<?php echo site_url('serie/'.$element['id']); ?>" class="hover-up column col-auto bg-dark">
        <div class="panel-title text-center text-secondary h5"><?=$element['nom']?></div>
+       <div class="panel-subtitle">
+        <div class="bar">
+          <?php $total=$element['total']; $reste= $element['reste']; $vu= $total-$reste;
+                $progress=(100*$vu)/$total; ?>
+          <div class="bar-item text-gray" role="progressbar" style="width:<?=$progress?>%;"
+             aria-valuenow="<?=$vu?>" aria-valuemin="0" aria-valuemax="<?=$total?>">
+           <?=$vu.'/'.$total?></div>
+        </div>
+      </div>
        <div class="panel-image">
            <img <?php cache_src($element['urlImage']); ?> class="img-responsive p-centered">
        </div>
@@ -47,6 +56,7 @@ $this->load->helper(['url','html','image_cache']); ?>
          </div>
        <?php endfor; ?>
      <?php endif; ?>
+
      </div>
      </div>
      </div>
