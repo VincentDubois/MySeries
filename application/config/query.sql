@@ -170,7 +170,7 @@ INSERT INTO suivre(idUser,idSerie) VALUES (:idUser,:idSerie);
 #   :idSerie
 
 DELETE FROM suivre
-WHERE idUser=:idUser AND idSerie=idSerie;
+WHERE idUser=:idUser AND idSerie=:idSerie;
 
 ### isFollowing
 # Indique si un utilisateur suit une série
