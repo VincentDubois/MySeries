@@ -50,6 +50,7 @@ class Welcome extends CI_Controller {
 
 	public function logout()
 	{
+		$this->load->helper('url');
 		$this->load->model('user');
 		$this->user->logout();
 		redirect('/welcome/');
