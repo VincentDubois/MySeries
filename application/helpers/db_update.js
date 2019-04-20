@@ -6,12 +6,14 @@ class Field {
     this.quote = !this.type.startsWith("int") && !this.type.startsWith("dec");
   }
 
-  getValue(line){
+  getValue(line, protect=true){
     let result = line;
     for(let i= 0; i < this.key.length; ++i){
         result = result[this.key[i]];
         if (result === null || typeof result === 'undefined') return "null";
     }
+
+    if (!protect) return result;
 
     result = String(result);
     result = result.split("\"").join("\\\"");
@@ -63,6 +65,15 @@ class Table {
     toRemove.forEach((key)=>{delete this.data[key];});
   }
 
+  generateArray(id){
+    var result = {};
+    this.fields.forEach((field)=>{result[field.name] = field.getValue(this.data[id],false);});
+    return result;
+  }
+
+  generateAllArray(){
+    return this.keys.map(id=>this.generateArray(id));
+  }
 
   generateInsert(elt){
     const t = this.fields.map((field)=>field.getValue(elt));
@@ -189,11 +200,11 @@ class Query {
      await fetch(`https://api.tvmaze.com/search/shows?q=`+query)
       .then(result=> result.json())
       .then((result)=>{
-        console.log(result)
         for(let line in result) {
           this.serie.add(result[line].show);
         }
         this.selection =  result.map(line=>line.show.id);
+        console.log(JSON.stringify(this.serie.generateAllArray()));
       });
 
   }

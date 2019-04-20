@@ -76,11 +76,16 @@ class My_queries {
     $path=APPPATH.'helpers';
     exec("cd $path;node db_update.js '# $id'",$result);
 
-
     $commands = explode(";\n",join("\n",$result));
     foreach($commands as $command){
       $this->CI->db->simple_query($command.';');
     }
+  }
+
+  public function search_serie($query){
+    $path=APPPATH.'helpers';
+    exec("cd $path;node db_update.js '$query'",$result);
+    return json_decode(join("\n",$result));
   }
 
 

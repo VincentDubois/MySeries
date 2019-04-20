@@ -10,8 +10,7 @@ class Show extends CI_Controller {
 		$this->load->model('serie');
 	  $data=$this->user->get_logged_user();
 
-		$this->load->library('my_queries');
-		$this->my_queries->update_serie($id_serie);
+
 
 		$data['serie'] = $this->serie->get($id_serie);
 		$data['cast'] = $this->serie->get_cast($id_serie);
@@ -42,6 +41,14 @@ class Show extends CI_Controller {
 		if($this->user->is_logged()){
 				$this->serie->watched(isset($_POST['vu']),$id_episode);
 		}
+		redirect("serie/$id_serie/$saison");
+	}
+
+	public function update($id_serie,$saison=1){
+		$this->load->helper('url');
+		$this->load->library('my_queries');
+		$this->my_queries->update_serie($id_serie);
+
 		redirect("serie/$id_serie/$saison");
 	}
 
