@@ -7,7 +7,9 @@ $this->load->helper(['url','html','image_cache']);?>
         <div class="panel bg-secondary">
           <div class="columns col-gapless">
           <div class="panel-image column col-5 p-2">
-            <img <?php cache_src($serie->urlImage);?> class="img-responsive p-centered">
+            <a href="<?=$serie->url?>">
+              <img <?php cache_src($serie->urlImage);?> class="img-responsive p-centered">
+            </a>
           </div>
           <div class="panel-body column p-2 col-7">
             <div class="bg-gray p-1 m-1">
@@ -92,7 +94,9 @@ $this->load->helper(['url','html','image_cache']);?>
                             <p class="text-justify"><?php echo $element->resume ?></p>
                           </div>
                           <div class="col-5 flex-centered">
-                             <img <?php cache_src($element->urlImage); ?> class="img-responsive p-2">
+                            <a href="<?=$element->url?>">
+                              <img <?php cache_src($element->urlImage); ?> class="img-responsive p-2">
+                            </a>
                           </div>
                         </div>
                       </div>

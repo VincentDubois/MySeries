@@ -6,7 +6,9 @@ $this->load->helper(['url','html','image_cache']);?>
       <div class="column col-auto p-2 m-2">
         <div class="panel bg-secondary">
           <div class="panel-image">
-            <img <?php cache_src($personne->urlImage);?> class="img-responsive p-centered">
+            <a href="<?=$personne->url?>">
+              <img <?php cache_src($personne->urlImage);?> class="img-responsive p-centered">
+            </a>
           </div>
             <div class="panel-title text-center bg-primary">
             <div class="h5 text-secondary"><?=$personne->nom ?></div>
