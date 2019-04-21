@@ -22,13 +22,15 @@ class User extends CI_Model {
 
     $userId =-1;
     $last = NULL;
-    if ($query->num_rows()== 0){
+    if ($query->num_rows()== 0){ // nouvel utilisateur, on enregistre
       $this->my_queries->query('register_user', $_POST);
       $userId = $this->my_queries->insert_id();
-    } else if ($query->first_row()->password == $password){
+    } else if ($query->first_row()->ok){
       $userId = $query->first_row()->id;
       $last = $query->first_row()->lastVisit;
       $this->my_queries->query('update_visit', ['id'=>$userId]);
+    } else {
+      var_dump($query->first_row());
     }
 
     if ($userId != -1){

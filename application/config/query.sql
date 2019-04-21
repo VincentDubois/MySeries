@@ -17,7 +17,7 @@
 #   password
 #   lastVisit
 
-SELECT id,password,lastVisit FROM user
+SELECT id,PASSWORD(:password)=password AS ok, lastVisit FROM user
   WHERE email = :email;
 
 ### register_user
@@ -32,7 +32,7 @@ SELECT id,password,lastVisit FROM user
 #
 
 INSERT INTO user(email,password,lastVisit)
-  VALUES (:email,:password,CURDATE());
+  VALUES (:email,PASSWORD(:password),CURDATE());
 
 ### update_visit
 #

@@ -69,7 +69,7 @@ class My_queries {
   }
 
   public function insert_id(){
-      return $this->db->insert_id();
+      return $this->CI->db->insert_id();
   }
 
   public function update_serie($id){
