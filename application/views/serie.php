@@ -17,14 +17,20 @@ $this->load->helper(['url','html','image_cache']);?>
                   <button action="submit" name="follow" value="<?= $serie->follow ? 'false' : 'true' ?>"
                        class="btn btn-action s-circle">
                     <i class="icon <?= $serie->follow ? 'icon-cross' : 'icon-plus' ?>"></i></button>
-                  <?php echo $serie->nom.' <span class="h6 text-gray">('.substr($serie->premiere,0,4).')</span>'; ?></div>
+                  <?php echo $serie->nom.' <span class="h6 text-gray">('.substr($serie->premiere,0,4).')</span>'; ?>
                 </form>
               <?php else:?>
-                <?php echo $serie->nom.' <span class="h6 text-gray">('.substr($serie->premiere,0,4).')</span>'; ?></div>
+                <?php echo $serie->nom.' <span class="h6 text-gray">('.substr($serie->premiere,0,4).')</span>'; ?>
               <?php endif;?>
+              </div>
 
             <p class="text-dark text-justify bg-gray">
               <?php echo $serie->resume; ?>
+              <h6 class="text-gray m-2"><form action="<?php echo site_url('serie/update/'.$serie->id.'/'.$saison); ?>" method="post">
+                <button action="submit" name="update" class="btn btn-action s-circle">
+                  <i class="icon icon-refresh"></i></button>
+                  Mettre à jour les informations
+              </form></h6>
             </p>
           </div>
           </div>
