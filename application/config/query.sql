@@ -70,7 +70,7 @@ WHERE idSerie=:id;
 # Pour chaque saison, on souhaite connaître aussi le nombre d épisodes
 #
 # Paramètre
-#    :id
+#    :id       id de la série
 #
 # Champs attendus
 #    saison
@@ -86,10 +86,11 @@ ORDER BY saison;
 
 ### get_episode_list
 # Obtient la liste des episodes pour une série donnée,
-# triés par saison et épisode
+# triés par numéro d épisode
 #
 # Paramètre
-#    :id
+#    :id      id de la série
+#    :saison
 #
 # Champs attendus
 #    episode   tous
@@ -102,7 +103,7 @@ ORDER BY saison,numero;
 # Obtient la liste des membres de l équipe de tournage
 #
 # Paramètre
-#    :id
+#    :id       id de la série
 #
 # Champs attendus
 #    poste et personne   tous (il n y a pas de problème de champ ambigus
@@ -142,7 +143,7 @@ WHERE id=:id;
 # Obtient les personnages joués ainsi que les séries correspondantes
 #
 # Paramètre
-#    :id
+#    :id       id de l acteur
 #
 # Champs attendus
 #    s_id      id de la série
@@ -162,7 +163,7 @@ WHERE idPersonne=:id;
 # Obtient la liste des postes occuppés dans les équipes des séries
 #
 # Paramètre
-#    :id
+#    :id       id de la personne
 #
 # Champs attendus
 #    titre     de la table poste
@@ -226,7 +227,7 @@ INSERT INTO user(email,password,lastVisit)
 # Mets à jour la date de dernière visite d un utilisateur
 #
 # Paramètres
-#    :id
+#    :id       id de l utilisateur
 
 UPDATE user
 SET lastVisit=CURDATE()
@@ -314,7 +315,7 @@ WHERE idUser=:idUser AND idEpisode=:idEpisode;
 #   A partir de la page d une serie
 #
 # Paramètres
-#    :id
+#    :id         id de la serie
 #    :userId
 #    :saison
 #
@@ -336,7 +337,7 @@ ORDER BY saison,numero;
 #   Les séries retournées sont affichées sur la page de profil
 #
 # Paramètre
-#   :userId
+#    :userId
 #
 # Champs attendus
 #    serie     tous les champs
@@ -359,7 +360,7 @@ ORDER BY reste DESC, serie.premiere DESC;
 #   Les épisodes retournées sont affichées sur la page de profil
 #
 # Paramètre
-#   :userId
+#    :userId
 #
 # Champs attendus
 #    episode     tous les champs
