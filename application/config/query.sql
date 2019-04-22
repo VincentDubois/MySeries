@@ -20,13 +20,9 @@
 #   serie         tous
 #   new           le nombre d épisodes sortis
 
-SELECT serie.*,
-  SUM(IF(episode.premiere>=:lastVisit AND episode.premiere<=CURDATE(),1,0)) AS new
-FROM serie
-JOIN episode ON episode.idSerie = serie.id
-GROUP BY serie.id
-ORDER BY new DESC,serie.premiere DESC
-LIMIT :limit;
+
+# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
+# commentaires situé au dessus
 
 
 ################################ Page série ####################################
@@ -41,8 +37,9 @@ LIMIT :limit;
 # Champs attendus
 #    serie     tous
 
-SELECT * FROM serie
-WHERE id=:id;
+
+# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
+# commentaires situé au dessus
 
 
 ### get_cast
@@ -59,11 +56,8 @@ WHERE id=:id;
 #    a_id      id de l acteur
 #    a_nom     nom de l acteur
 
-SELECT personnage.urlImage AS p_image,personnage.nom AS p_nom,
-       personne.id AS a_id, personne.nom AS a_nom FROM jouer
-JOIN personnage ON jouer.idPersonnage = personnage.id
-JOIN personne ON jouer.idPersonne = personne.id
-WHERE idSerie=:id;
+# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
+# commentaires situé au dessus
 
 ### get_season_list
 # Obtient la liste des saisons pour une série donnée
@@ -78,11 +72,8 @@ WHERE idSerie=:id;
 #    debut     date du premier épisode
 #    fin       date du dernier épisode
 
-SELECT saison, MAX(numero) AS nb, MIN(premiere) AS debut, MAX(premiere) AS fin
-FROM episode
-WHERE idSerie=:id
-GROUP BY saison
-ORDER BY saison;
+# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
+# commentaires situé au dessus
 
 ### get_episode_list
 # Obtient la liste des episodes pour une série donnée,
@@ -94,9 +85,8 @@ ORDER BY saison;
 # Champs attendus
 #    episode   tous
 
-SELECT * FROM episode
-WHERE idSerie=:id AND saison=:saison
-ORDER BY saison,numero;
+# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
+# commentaires situé au dessus
 
 ### get_crew_list
 # Obtient la liste des membres de l équipe de tournage
@@ -108,9 +98,8 @@ ORDER BY saison,numero;
 #    poste et personne   tous (il n y a pas de problème de champ ambigus
 #                              donc pas d alias)
 
-SELECT * FROM poste
-JOIN personne ON personne.id = poste.idPersonne
-WHERE idSerie=:id;
+# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
+# commentaires situé au dessus
 
 ### get_next_episode
 # Retourne le premier épisode diffusé aujourd hui ou le plus tôt après
@@ -121,10 +110,8 @@ WHERE idSerie=:id;
 # Champs attendus
 #    episode           tous
 
-SELECT * FROM episode
-WHERE idSerie = :id AND premiere>CURDATE()
-ORDER BY premiere ASC
-LIMIT 1;
+# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
+# commentaires situé au dessus
 
 ####################### Page sur une personnes #################################
 
@@ -134,8 +121,8 @@ LIMIT 1;
 # Paramètre
 #    :id
 
-SELECT * FROM personne
-WHERE id=:id;
+# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
+# commentaires situé au dessus
 
 
 ### get_actor_role
@@ -152,11 +139,8 @@ WHERE id=:id;
 #    p_nom     nom du personnage
 
 
-SELECT serie.id AS s_id, serie.nom AS s_nom, serie.urlImage AS s_image,
-      personnage.nom AS p_nom, personnage.urlImage AS p_image FROM jouer
-JOIN personnage ON jouer.idPersonnage=personnage.id
-JOIN serie ON jouer.idSerie = serie.id
-WHERE idPersonne=:id;
+# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
+# commentaires situé au dessus
 
 ### get_crew_role
 # Obtient la liste des postes occuppés dans les équipes des séries
@@ -170,10 +154,8 @@ WHERE idPersonne=:id;
 #    s_nom     nom de la série
 #    s_image   urlImage de la série
 
-SELECT serie.id AS s_id, serie.nom AS s_nom, serie.urlImage AS s_image, titre
-FROM poste
-JOIN serie ON poste.idSerie = serie.id
-WHERE idPersonne=:id;
+# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
+# commentaires situé au dessus
 
 
 
@@ -201,8 +183,8 @@ WHERE idPersonne=:id;
 #               mot de passe chiffré dans la base
 
 
-SELECT id,PASSWORD(:password)=password AS ok, lastVisit FROM user
-  WHERE email = :email;
+# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
+# commentaires situé au dessus
 
 ### register_user
 # Ajoute un utilisateur dans la base de données. Il faut configurer
@@ -219,8 +201,8 @@ SELECT id,PASSWORD(:password)=password AS ok, lastVisit FROM user
 #   :password
 #
 
-INSERT INTO user(email,password,lastVisit)
-  VALUES (:email,PASSWORD(:password),CURDATE());
+# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
+# commentaires situé au dessus
 
 ### update_visit
 # Mets à jour la date de dernière visite d un utilisateur
@@ -228,9 +210,8 @@ INSERT INTO user(email,password,lastVisit)
 # Paramètres
 #    :id
 
-UPDATE user
-SET lastVisit=CURDATE()
-WHERE id=:id;
+# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
+# commentaires situé au dessus
 
 
 ###################### Gestion des séries suivies #############################
@@ -246,7 +227,8 @@ WHERE id=:id;
 #   :idUser
 #   :idSerie
 
-INSERT INTO suivre(idUser,idSerie) VALUES (:idUser,:idSerie);
+# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
+# commentaires situé au dessus
 
 ### unfollow
 # Indique qu un utilisateur ne suit plus une serie
@@ -258,8 +240,8 @@ INSERT INTO suivre(idUser,idSerie) VALUES (:idUser,:idSerie);
 #   :idUser
 #   :idSerie
 
-DELETE FROM suivre
-WHERE idUser=:idUser AND idSerie=:idSerie;
+# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
+# commentaires situé au dessus
 
 ### isFollowing
 # Indique si un utilisateur suit une série. On considère que le résultat
@@ -273,8 +255,8 @@ WHERE idUser=:idUser AND idSerie=:idSerie;
 #   :idUser
 #   :idSerie
 
-SELECT * FROM suivre
-WHERE idUser=:idUser AND idSerie=:idSerie;
+# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
+# commentaires situé au dessus
 
 
 ############################### Gestion des épisodes vus ######################
@@ -290,7 +272,8 @@ WHERE idUser=:idUser AND idSerie=:idSerie;
 #   :idUser
 #   :idEpisode
 
-INSERT INTO vu(idUser,idEpisode) VALUES (:idUser,:idEpisode);
+# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
+# commentaires situé au dessus
 
 ### unwatched
 # Retire un épisode des episodes vus
@@ -302,8 +285,8 @@ INSERT INTO vu(idUser,idEpisode) VALUES (:idUser,:idEpisode);
 #   :idUser
 #   :idEpisode
 
-DELETE FROM vu
-WHERE idUser=:idUser AND idEpisode=:idEpisode;
+# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
+# commentaires situé au dessus
 
 ### get_episode_list_vu
 # Obtient la liste des episodes pour une série donnée
@@ -322,10 +305,8 @@ WHERE idUser=:idUser AND idEpisode=:idEpisode;
 #    episode     tous les champs
 #    vu          (booleén) vrai si l épisode a été vu
 
-SELECT episode.*, vu.idUser IS NOT NULL AS vu FROM episode
-LEFT JOIN vu ON vu.idEpisode = episode.id AND vu.idUser=:userId
-WHERE idSerie=:id AND saison=:saison
-ORDER BY saison,numero;
+# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
+# commentaires situé au dessus
 
 ### get_followed_series
 # Obtient les données de toutes les séries suivies.
@@ -343,13 +324,8 @@ ORDER BY saison,numero;
 #    total     nombre total d épisodes dans la série
 #    reste     le nombre d épisodes non vus
 
-SELECT serie.*, COUNT(*) AS total, SUM(IF(vu.idUser IS NULL,1,0)) AS reste FROM serie
-JOIN suivre ON suivre.idSerie=serie.id
-JOIN episode ON episode.idSerie=serie.id
-LEFT JOIN vu ON vu.idEpisode=episode.id AND vu.idUser = suivre.idUser
-WHERE suivre.idUser = :userId
-GROUP BY serie.id
-ORDER BY reste DESC, serie.premiere DESC;
+# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
+# commentaires situé au dessus
 
 ### get_next_episode_user
 # Obtient les infos des episodes non encore vus de chaque série suivie
@@ -364,11 +340,5 @@ ORDER BY reste DESC, serie.premiere DESC;
 # Champs attendus
 #    episode     tous les champs
 
-SELECT episode.* FROM episode
-JOIN suivre ON suivre.idSerie = episode.idSerie
-WHERE suivre.idUser = :userId AND
-  episode.id NOT IN (
-    SELECT vu.idEpisode FROM vu
-    WHERE vu.idUser = :userId
-  )
-ORDER BY episode.idSerie,episode.saison,episode.numero ;
+# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
+# commentaires situé au dessus
