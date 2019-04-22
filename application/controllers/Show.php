@@ -6,11 +6,13 @@ class Show extends CI_Controller {
 
 	public function detail($id_serie,$saison)
 	{
+		$this->load->library('my_queries');
     $this->load->model('user');
 		$this->load->model('serie');
+
+		$this->my_queries->require('get_serie');
+		
 	  $data=$this->user->get_logged_user();
-
-
 
 		$data['serie'] = $this->serie->get($id_serie);
 		$data['cast'] = $this->serie->get_cast($id_serie);

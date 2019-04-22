@@ -18,12 +18,12 @@ class Personne extends CI_Model {
 
   public function get_actor_role($id){
     $query = $this->my_queries->query('get_actor_role', ['id' => $id]);
-    return $query->result_array();
+    return $query== null ? [] : $query->result_array();
   }
 
   public function get_crew_role($id){
     $query = $this->my_queries->query('get_crew_role', ['id' => $id]);
-    return $query->result_array();
+    return $query==null ? [] : $query->result_array();
   }
 
   public function get_series($id){
