@@ -31,7 +31,7 @@ class Serie extends CI_Model {
       $result[$series[$i]['id']] = $series[$i];
     }
 
-    $query = $this->my_queries->query('get_next_episode', $_SESSION);
+    $query = $this->my_queries->query('get_next_episode_user', $_SESSION);
     $episodes = $query->result_array();
     for($i=0;$i<count($episodes);$i++){
       $result[$episodes[$i]['idSerie']]['episode'][] = $episodes[$i];
@@ -71,6 +71,11 @@ class Serie extends CI_Model {
     }
     $query = $this->my_queries->query($name, $data);
     return $query->result();
+  }
+
+  public function get_next_episode($id){
+    $query = $this->my_queries->query('get_next_episode', ['id' => $id]);
+    return $query->first_row();
   }
 
   public function get_crew_list($id){

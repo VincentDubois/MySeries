@@ -112,6 +112,20 @@ SELECT * FROM poste
 JOIN personne ON personne.id = poste.idPersonne
 WHERE idSerie=:id;
 
+### get_next_episode
+# Retourne le premier épisode diffusé aujourd hui ou le plus tôt après
+#
+# Paramètres
+#    :id               id de la série
+#
+# Champs attendus
+#    episode           tous
+
+SELECT * FROM episode
+WHERE idSerie = :id AND premiere>CURDATE()
+ORDER BY premiere ASC
+LIMIT 1;
+
 ####################### Page sur une personnes #################################
 
 ### get_person
@@ -337,7 +351,7 @@ WHERE suivre.idUser = :userId
 GROUP BY serie.id
 ORDER BY reste DESC, serie.premiere DESC;
 
-### get_next_episode
+### get_next_episode_user
 # Obtient les infos des episodes non encore vus de chaque série suivie
 # On triera par série, saison et numero.
 #

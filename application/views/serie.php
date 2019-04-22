@@ -33,6 +33,13 @@ $this->load->helper(['url','html','image_cache']);?>
                   <i class="icon icon-refresh"></i></button>
                   Mettre à jour les informations
               </form></h6>
+              <?php if(isset($next->id)): ?>
+              <h6 class="text-gray m-2">
+                <a href=<?=site_url('serie/'.$serie->id.'/'.$next->saison.'#'.$next->numero)?> class="btn btn-action s-circle">
+                  <i class="icon icon-forward"></i></a>
+                  Prochain épisode le <?=date("d/m/Y",strtotime($next->premiere))?>
+              </h6>
+              <?php endif; ?>
             </p>
           </div>
           </div>

@@ -17,6 +17,7 @@ class Show extends CI_Controller {
 		$data['crew'] = $this->serie->get_crew_list($id_serie);
 		$data['season'] = $this->serie->get_season_list($id_serie);
 		$data['episode'] = $this->serie->get_episode_list($id_serie,$saison);
+		$data['next'] = $this->serie->get_next_episode($id_serie);
 		$data['saison'] = $saison;
 
 
