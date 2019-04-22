@@ -64,7 +64,7 @@
 # Pour chaque saison, on souhaite connaître aussi le nombre d épisodes
 #
 # Paramètre
-#    :id
+#    :id       id de la série
 #
 # Champs attendus
 #    saison
@@ -77,10 +77,11 @@
 
 ### get_episode_list
 # Obtient la liste des episodes pour une série donnée,
-# triés par saison et épisode
+# triés par numéro d épisode
 #
 # Paramètre
-#    :id
+#    :id      id de la série
+#    :saison
 #
 # Champs attendus
 #    episode   tous
@@ -92,7 +93,7 @@
 # Obtient la liste des membres de l équipe de tournage
 #
 # Paramètre
-#    :id
+#    :id       id de la série
 #
 # Champs attendus
 #    poste et personne   tous (il n y a pas de problème de champ ambigus
@@ -129,7 +130,7 @@
 # Obtient les personnages joués ainsi que les séries correspondantes
 #
 # Paramètre
-#    :id
+#    :id       id de l acteur
 #
 # Champs attendus
 #    s_id      id de la série
@@ -146,7 +147,7 @@
 # Obtient la liste des postes occuppés dans les équipes des séries
 #
 # Paramètre
-#    :id
+#    :id       id de la personne
 #
 # Champs attendus
 #    titre     de la table poste
@@ -208,7 +209,7 @@
 # Mets à jour la date de dernière visite d un utilisateur
 #
 # Paramètres
-#    :id
+#    :id       id de l utilisateur
 
 # Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
 # commentaires situé au dessus
@@ -297,7 +298,7 @@
 #   A partir de la page d une serie
 #
 # Paramètres
-#    :id
+#    :id         id de la serie
 #    :userId
 #    :saison
 #
@@ -317,7 +318,7 @@
 #   Les séries retournées sont affichées sur la page de profil
 #
 # Paramètre
-#   :userId
+#    :userId
 #
 # Champs attendus
 #    serie     tous les champs
@@ -335,7 +336,7 @@
 #   Les épisodes retournées sont affichées sur la page de profil
 #
 # Paramètre
-#   :userId
+#    :userId
 #
 # Champs attendus
 #    episode     tous les champs

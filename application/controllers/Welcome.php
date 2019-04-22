@@ -35,11 +35,15 @@ class Welcome extends CI_Controller {
 
 	public function login()
 	{
+		$this->load->library('my_queries');
 		$this->load->helper('url');
 		$this->load->model('user');
 
+		$this->my_queries->require('check_user');				
+
 		$this->user->login();
-		if ($this->user->is_logged()){
+		if ($this->user->is_logged() &&
+		    $this->my_queries->has('get_followed_series')){
 			redirect('/home/');
 		} else {
 			redirect('/welcome/');

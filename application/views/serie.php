@@ -66,7 +66,7 @@ $this->load->helper(['url','html','image_cache']);?>
 </ul>
 </div>
 <div class="panel-title label h5 label-rounded label-primary p-2 m-2"> Saison <?=$saison?> <span class="h6 text-gray">
-  <?=substr($episode[0]->premiere,0,4) ?>  (<?=count($episode)?> episodes)</span></div>
+  <?=substr($season[$saison-1]->debut,0,4) ?>  (<?=$season[$saison-1]->nb?> episodes)</span></div>
    <div class="timeline panel-body text-dark py-2">
        <?php foreach($episode as $element): ?>
                   <div class="timeline-item">
@@ -138,7 +138,7 @@ $this->load->helper(['url','html','image_cache']);?>
     <?php foreach ($crew as $element): ?>
       <div class="btn-group btn-group my-2 col-12">
         <a href="#" class="btn btn-primary disabled"><?=$element->titre?></a>
-        <a href="<?=site_url('personne/'.$element->id)?>"" class="btn btn-secondary"><?=$element->nom?></a>
+        <a href="<?=site_url('personne/'.$element->id)?>" class="btn btn-secondary"><?=$element->nom?></a>
       </div>
     <?php endforeach; ?>
 

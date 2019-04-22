@@ -54,6 +54,7 @@ class My_queries {
     // On demande toutes les correspondances
       preg_match_all($pattern,$sql_query,$params,PREG_PATTERN_ORDER);
     // Pour chaque correspondance, on extrait de $data la valeur,
+      $param = [];
       foreach($params[1] as $p){
         $param[] = $data[$p];
       }
@@ -61,11 +62,31 @@ class My_queries {
     // On remplace maintenant les :param de la requête par des ?
       $sql_query = preg_replace($pattern,'?',$sql_query);
 
-    // On exécute la requête modifiée, en passant le tableau de paramètres
+      if (strlen(trim($sql_query))==0) { // Si la requête n'a pas encore été écrite
+        return null; //show_error("requete absente : $name");
+      }
+      // On exécute la requête modifiée, en passant le tableau de paramètres
 	    $query = $this->CI->db->query($sql_query, $param);
 
     // retour du résultat
       return $query;
+  }
+
+
+  public function has($name){
+    return isset($this->queries[$name]) && strlen(trim($this->queries[$name]))>0;
+  }
+
+  public function require($name){
+    if (!isset($this->queries[$name])){
+        show_error("Requete non trouvée : $name\n".
+                  "Vous avez probablement supprimé le commentaire correspondant ".
+                  "dans le fichier 'query.sql'");
+    }
+    $sql_query = $this->queries[$name];
+    if (strlen(trim($sql_query))==0) {
+      show_error("Désolé, la requête '$name' est nécessaire au bon fonctionnement de cette page");
+    }
   }
 
   public function insert_id(){
