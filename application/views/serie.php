@@ -82,7 +82,7 @@ $this->load->helper(['url','html','image_cache']);?>
                           <?php if(isset($element->vu)):?>
                             <label class="form-checkbox float-right">
                             <input type="checkbox" name="vu"
-                              <?= $element->vu==1 ? 'checked="checked"' :''?>
+                              <?= $element->vu ? 'checked="checked"' :''?>
                               action="submit" onChange='submit();'>
                             <i class="form-icon"></i> Vu
                             </label>
