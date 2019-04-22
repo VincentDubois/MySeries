@@ -226,8 +226,7 @@ WHERE id=:id;
 # Indique qu un utilisateur suit une serie
 #
 # Utilisation
-#   A partir de la page d une serie, ou plus tard à partir de la page perso
-#   d un utilisateur connecté
+#   A partir de la page d une serie
 #
 # Paramètres
 #   :idUser
@@ -269,6 +268,10 @@ WHERE idUser=:idUser AND idSerie=:idSerie;
 ### watched
 # Indique qu un utilisateur a vu un épisode
 #
+# Utilisation
+#   A partir de la page d une serie, ou plus tard à partir de la page perso
+#   d un utilisateur connecté
+#
 # Paramètres
 #   :idUser
 #   :idEpisode
@@ -277,6 +280,9 @@ INSERT INTO vu(idUser,idEpisode) VALUES (:idUser,:idEpisode);
 
 ### unwatched
 # Retire un épisode des episodes vus
+#
+# Utilisation
+#   A partir de la page d une serie
 #
 # Paramètres
 #   :idUser
@@ -289,6 +295,9 @@ WHERE idUser=:idUser AND idEpisode=:idEpisode;
 # Obtient la liste des episodes pour une série donnée
 # On retournera aussi pour chaque épisode si il a été vu ou non par l utilisateur
 #
+#
+# Utilisation
+#   A partir de la page d une serie
 #
 # Paramètres
 #    :id
@@ -303,8 +312,6 @@ SELECT episode.*, vu.idUser IS NOT NULL AS vu FROM episode
 LEFT JOIN vu ON vu.idEpisode = episode.id AND vu.idUser=:userId
 WHERE idSerie=:id AND saison=:saison
 ORDER BY saison,numero;
-
-
 
 ### get_followed_series
 # Obtient les données de toutes les séries suivies.
