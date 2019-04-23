@@ -197,9 +197,10 @@ class Query {
     }
 
   async search(query){
-     await fetch(`https://api.tvmaze.com/search/shows?q=`+query)
-      .then(result=> result.json())
+     await axios.get(`http://api.tvmaze.com/search/shows?q=`+query)
+//      .then(result=> result.json())
       .then((result)=>{
+        result = result.data;
         for(let line in result) {
           this.serie.add(result[line].show);
         }
@@ -215,11 +216,12 @@ class Query {
 
   async handleAddShow(id) {
     if (!this.selection.includes(id)){
-      await fetch(`https://api.tvmaze.com/shows/`+id+
+      await axios.get(`http://api.tvmaze.com/shows/`+id+
             `?embed[]=cast&embed[]=crew&embed[]=episodes`)
-        .then(result=>result.json())
+//        .then(result=>result.json())
         .then((result)=>{
-//          console.log(result);
+          result = result.data;
+          console.log(result);
           this.serie.add(result);
 
           const cast = result._embedded.cast;
@@ -316,5 +318,8 @@ class Query {
 
 }
 
-const fetch = require('node-fetch');
+//const xfetch = require('node-fetch');
+//const xfetch = require('xfetch')
+const axios = require("axios");
+
 var query = new Query(process.argv.slice(2).join(' '));
