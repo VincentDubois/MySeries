@@ -9,7 +9,7 @@ $this->load->helper(['url','html','image_cache']); ?>
     <?php foreach ($serie_list as $serie): ?>
       <div class="column col-2 col-xs-12 col-sm-6 col-md-4 col-lg-3" >
         <a href="<?php echo site_url('serie/'.$serie->id); ?>" class="panel my-2 hover-up bg-dark my-badge"
-          <?php if ($serie->new >0) echo ' data-badge="'.$serie->new.'" ';?> >
+          <?php if (isset($serie->new) && $serie->new >0) echo ' data-badge="'.$serie->new.'" ';?> >
           <div class="panel-image">
             <img <?php cache_src($serie->urlImage); ?> class="img-responsive p-centered">
           </div>
