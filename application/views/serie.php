@@ -103,7 +103,7 @@ $this->load->helper(['url','html','image_cache']);?>
                           </div>
                           <div class="col-5 flex-centered">
                             <a href="<?=$element->url?>">
-                              <img <?php cache_src($element->urlImage); ?> class="img-responsive p-2">
+                              <img <?php cache_src($element->urlImage,false); ?> class="img-responsive p-2">
                             </a>
                           </div>
                         </div>

@@ -2,7 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 $this->load->helper(['url','html']);
 
-function url_to_path($url){
+function url_to_path($url,$default = 'portrait'){
+  if ($url==NULL) $url='public/img/medium_'.$default.'.png';
   if(preg_match('[http://static.tvmaze.com/uploads/images/(.+)]i', $url,$result)) {
     $path = $result[1];
     $path = str_replace('/','_',$path);
@@ -31,17 +32,18 @@ curl_close($ch);
 fclose($fp);
 }
 
-function cache_image($url){
-  $path = url_to_path($url);
+function cache_image($url,$default='portrait'){
+  $path = url_to_path($url,$default);
   if ($path == $url) return $url;
 
-  if ($path !== null && $path !== "" &&
+  if ($path !== null && $path !== '' &&
     (file_exists(FCPATH.$path)||my_copy($url,FCPATH.$path))) return base_url($path);
   return $url;
 }
 
-function cache_src($url){
-  echo 'src="'.cache_image($url).'" ';
+function cache_src($url,$portrait=true){
+  $default = $portrait ? 'portrait' : 'landscape';
+  echo 'src="'.cache_image($url,$default).'" ';
 }
 
 
