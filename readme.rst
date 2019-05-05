@@ -42,15 +42,15 @@ Les fichiers sont récupérés de préférence avec git clone. Ensuite,
 à partir du répertoire racine du projet (celui contenant ce fichier d'aide) il
 faut installer le projet avec les commandes suivantes :
 
-composer install
+``composer install
 npm i axios #(optionnel)
 cd application/config
-cp database.php.example database.php
+cp database.php.example database.php``
 
 Il faut ensuite adapter le contenu de database.php à votre configuration Mysql.
 A l'iut, les informations utiles peuvent être obtenues avec la commande suivante
 
-cat ~/.my.cnf
+``cat ~/.my.cnf``
 
 
 *********
@@ -60,7 +60,7 @@ Lancement
 Toujours à partir de la racine du projet, on peut utiliser php pour servir le
 site :
 
-php -S 127.0.0.1:8000
+``php -S 127.0.0.1:8000``
 
 Normalement, on peut ensuite l'ouvrir dans un navigateur à cette addresse
 ( 127.0.0.1:8000 )
