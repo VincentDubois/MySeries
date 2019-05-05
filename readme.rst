@@ -43,8 +43,11 @@ Les fichiers sont récupérés de préférence avec git clone. Ensuite,
 faut installer le projet avec les commandes suivantes :
 
 ``composer install
+
 npm i axios #(optionnel)
+
 cd application/config
+
 cp database.php.example database.php``
 
 Il faut ensuite adapter le contenu de database.php à votre configuration Mysql.
