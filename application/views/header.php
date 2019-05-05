@@ -16,13 +16,17 @@ $this->load->helper(['url','html']); ?>
   <header class="navbar bg-primary">
   <section class="navbar-section">
     <a href="<?php echo site_url(); ?>"
-       class="navbar-brand mr-2 px-2 text-secondary">Mes Séries</a>
+       class="navbar-brand mr-2 px-2 text-secondary">
+           <img class="icon icon-2x" src="<?=base_url('icon.png')?>">
+           Mes Séries
+    </a>
 <!--    <a href="#" class="btn btn-primary">Calendrier</a>-->
     <a href="<?= site_url('search/'); ?>" class="btn btn-primary">Rechercher</a>
     <?php if (isset($email)):?>
       <a href="<?= site_url('home');?>" class="btn btn-primary">Perso</a>
     <?php endif;?>
   </section>
+
 <?php if (isset($email)): ?>
   <section class="navbar-section">
     <form action="<?php echo site_url("welcome/logout"); ?>" method="post">
