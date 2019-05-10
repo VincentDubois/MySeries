@@ -1,70 +1,77 @@
-###################
-What is CodeIgniter
-###################
+############
+Présentation
+############
 
-CodeIgniter is an Application Development Framework - a toolkit - for people
-who build web sites using PHP. Its goal is to enable you to develop projects
-much faster than you could if you were writing code from scratch, by providing
-a rich set of libraries for commonly needed tasks, as well as a simple
-interface and logical structure to access these libraries. CodeIgniter lets
-you creatively focus on your project by minimizing the amount of code needed
-for a given task.
+Ce projet fait partie du cours de base de données du DUT MMI de l'IUT de Lens.
+Il s'agit d'un site permettant de naviguer dans une base de données sur les
+séries.
+Les données sont obtenues par l'API de TVMaze
+(https://www.tvmaze.com/api). Le site a été développé en utlisant le framework
+CodeIgniter et Spectre CSS.
+Tout est complet et fonctionnel, à l'exception du fichier
+application/config/query.sql supposé contenir toutes les requêtes SQL du site,
+et qui contient à la place un descriptif des requêtes attendues et laissée en
+exercice. Le but est évidemment de trouver et écrire ces requêtes, afin
+de rendre le site pleinement opérationnel.
 
-*******************
-Release Information
-*******************
 
-This repo contains in-development code for future releases. To download the
-latest stable release please visit the `CodeIgniter Downloads
-<https://codeigniter.com/download>`_ page.
+**********
+Pré-requis
+**********
 
-**************************
-Changelog and New Features
-**************************
+Le projet nécessite une version suffisament récente de PHP, ainsi que
+l'installation de quelques bibliothèques par Composer
+(qui doit donc être installé aussi). Vous devez disposer d'un accès à une base
+de données MySQL (déjà créée) qui contiendra les informations initiales sur les
+séries (pour remplir la base, vous pouvez importer le fichier tvshows.sql si ce
+n'est pas déjà fait, ou une fois le site installé utiliser l'onglet recherche
+et ajouter manuellement vos séries en cliquant dessus dans le résultat de
+recherche)
 
-You can find a list of all changes for each release in the `user
-guide change log <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/changelog.rst>`_.
+En option, node.js peut être utilisé pour
+lancer la mise à jour de la base de données auprès de TVMaze. Si node n'est pas
+installé, seule cette fonctionnalité sera absente (donc la page de recherche et
+le bouton de raffraîchissement des séries seront sans effet).
 
-*******************
-Server Requirements
-*******************
-
-PHP version 5.6 or newer is recommended.
-
-It should work on 5.3.7 as well, but we strongly advise you NOT to run
-such old versions of PHP, because of potential security and performance
-issues, as well as missing features.
 
 ************
 Installation
 ************
 
-Please see the `installation section <https://codeigniter.com/user_guide/installation/index.html>`_
-of the CodeIgniter User Guide.
+Les fichiers sont récupérés de préférence avec git clone. Ensuite,
+à partir du répertoire racine du projet (celui contenant ce fichier d'aide) il
+faut installer le projet avec les commandes suivantes::
 
-*******
-License
-*******
+  composer install
+  npm i axios #(optionnel)
+  cd application/config
+  cp database.php.example database.php
 
-Please see the `license
-agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_.
+Il faut ensuite adapter le contenu de database.php à votre configuration Mysql.
+A l'iut, les informations utiles peuvent être obtenues avec la commande suivante::
+
+  cat ~/.my.cnf
+
 
 *********
-Resources
+Lancement
 *********
 
--  `User Guide <https://codeigniter.com/docs>`_
--  `Language File Translations <https://github.com/bcit-ci/codeigniter3-translations>`_
--  `Community Forums <http://forum.codeigniter.com/>`_
--  `Community Wiki <https://github.com/bcit-ci/CodeIgniter/wiki>`_
--  `Community Slack Channel <https://codeigniterchat.slack.com>`_
+Toujours à partir de la racine du projet, on peut utiliser php pour servir le
+site::
 
-Report security issues to our `Security Panel <mailto:security@codeigniter.com>`_
-or via our `page on HackerOne <https://hackerone.com/codeigniter>`_, thank you.
+  php -S 127.0.0.1:8000
 
-***************
-Acknowledgement
-***************
+Normalement, on peut ensuite l'ouvrir dans un navigateur à cette addresse
+( 127.0.0.1:8000 )
 
-The CodeIgniter team would like to thank EllisLab, all the
-contributors to the CodeIgniter project and you, the CodeIgniter user.
+
+*******
+travail
+*******
+
+Il ne vous reste plus qu'à compléter le fichier application/config/query.sql
+Pensez à tester vos requêtes au fur et à mesure.
+
+A partir des requêtes permettant de s'authentifier, il nécessaire d'avoir fini
+certains TP pour avancer sur le mini-projet.

@@ -66,7 +66,8 @@ $this->load->helper(['url','html','image_cache']);?>
 </ul>
 </div>
 <div class="panel-title label h5 label-rounded label-primary p-2 m-2"> Saison <?=$saison?> <span class="h6 text-gray">
-  <?=substr($season[$saison-1]->debut,0,4) ?>  (<?=$season[$saison-1]->nb?> episodes)</span></div>
+  <?php foreach($season as $s) if($s->saison==$saison) echo substr($s->debut,0,4).' ('.$s->nb.' episodes)';?>
+  </span></div>
    <div class="timeline panel-body text-dark py-2">
        <?php foreach($episode as $element): ?>
                   <div class="timeline-item">
@@ -102,7 +103,7 @@ $this->load->helper(['url','html','image_cache']);?>
                           </div>
                           <div class="col-5 flex-centered">
                             <a href="<?=$element->url?>">
-                              <img <?php cache_src($element->urlImage); ?> class="img-responsive p-2">
+                              <img <?php cache_src($element->urlImage,false); ?> class="img-responsive p-2">
                             </a>
                           </div>
                         </div>
