@@ -68,6 +68,8 @@ WHERE idSerie=:id;
 ### get_season_list
 # Obtient la liste des saisons pour une série donnée
 # Pour chaque saison, on souhaite connaître aussi le nombre d épisodes
+# et la durée totale (optionnelle) sous forme heures:minutes:secondes (utilisez
+# la fonction SEC_TO_TIME)
 #
 # Paramètre
 #    :id       id de la série
@@ -75,10 +77,12 @@ WHERE idSerie=:id;
 # Champs attendus
 #    saison
 #    nb        nombre d épisodes
+#    total     durée totale
 #    debut     date du premier épisode
 #    fin       date du dernier épisode
 
-SELECT saison, MAX(numero) AS nb, MIN(premiere) AS debut, MAX(premiere) AS fin
+SELECT saison, MAX(numero) AS nb, SEC_TO_TIME(SUM(duree*60)) AS total,
+       MIN(premiere) AS debut, MAX(premiere) AS fin
 FROM episode
 WHERE idSerie=:id
 GROUP BY saison
