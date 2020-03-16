@@ -25,7 +25,7 @@ class Welcome extends CI_Controller {
 		$data=$this->user->get_logged_user();
 		$lastVisit = isset($data['lastVisit']) ? $data['lastVisit'] : NULL;
 		if ($lastVisit==NULL || $lastVisit=='') $lastVisit=date('Y-m-d',strtotime('-7 day'));
-		$data['serie_list'] = $this->serie->get_all(30,$lastVisit);
+		$data['serie_list'] = $this->serie->get_all(60,$lastVisit);
 
 		$this->load->view('header',$data);
 //		$this->load->view('welcome_message');
@@ -39,7 +39,7 @@ class Welcome extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->model('user');
 
-		$this->my_queries->require('check_user');				
+		$this->my_queries->require('check_user');
 
 		$this->user->login();
 		if ($this->user->is_logged() &&
