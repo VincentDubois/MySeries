@@ -16,6 +16,15 @@ class Serie extends CI_Model {
     return $query == null ? [] : $query->result();
   }
 
+  public function get_by_genre($genre,$last){
+    $query = $this->my_queries->query('get_series_by_genre', ['genre' => $genre, 'lastVisit' => $last]);
+    return $query == null ? [] : $query->result();
+  }
+
+  public function get_all_categories(){
+    $query = $this->my_queries->query('get_all_categories', []);
+    return $query == null ? [] : $query->result();
+  }
 
   public function watched($vu, $idEpisode){
     $query = $this->my_queries->query($vu ? 'watched' : 'unwatched',
@@ -50,6 +59,11 @@ class Serie extends CI_Model {
       $result->follow = $query != null && $query->num_rows()>0;
     }
     return $result;
+  }
+
+  public function get_genre($id){
+    $query = $this->my_queries->query('get_genre', ['id' => $id]);
+    return $query == null ? [] : $query->result();
   }
 
   public function get_cast($id){

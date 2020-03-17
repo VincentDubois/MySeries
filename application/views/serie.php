@@ -28,6 +28,9 @@ $this->load->helper(['url','html','image_cache']);?>
 
             <p class="text-dark text-justify bg-gray">
               <?php echo $serie->resume; ?>
+              <?php foreach($genre as $tag): ?>
+                <a href="<?=site_url('category/'.$tag->nom); ?>"><span class="label label-rounded label-secondary"><?=$tag->nom?></span></a>
+              <?php endforeach; ?>
               <h6 class="text-gray m-2"><form action="<?php echo site_url('serie/update/'.$serie->id.'/'.$saison); ?>" method="post">
                 <button action="submit" name="update" class="btn btn-action s-circle">
                   <i class="icon icon-refresh"></i></button>

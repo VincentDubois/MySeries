@@ -3,7 +3,7 @@
 ############################## Page d accueil #################################
 
 ### get_all_series
-# Obtient les images de toutes les séries.
+# Obtient les informations de toutes les séries.
 # On triera les séries par age décroissant, et on retourne toutes les données
 # des séries
 #
@@ -18,7 +18,7 @@
 #
 # Champs attendus
 #   serie         tous
-#   new           le nombre d épisodes sortis
+#   new           le nombre d épisodes sortis (optionnel)
 
 SELECT serie.*,
   SUM(IF(episode.premiere>=:lastVisit AND episode.premiere<=CURDATE(),1,0)) AS new
@@ -27,6 +27,50 @@ JOIN episode ON episode.idSerie = serie.id
 GROUP BY serie.id
 ORDER BY new DESC,serie.premiere DESC
 LIMIT :limit;
+
+
+### get_series_by_genre
+# Obtient les mêmes informations que la requête précédente, mais uniquement pour
+# les séries d un genre.
+#
+# Optionnel :
+#   On fournit en plus le nombre d épisodes sortis depuis
+#   la dernière connection
+#
+#
+# Paramètre
+#   :genre        Le genre à afficher
+#   :lastVisit    Dernière connection
+#
+# Champs attendus
+#   serie         tous
+#   new           le nombre d épisodes sortis (optionnel)
+
+SELECT serie.*,
+  SUM(IF(episode.premiere>=:lastVisit AND episode.premiere<=CURDATE(),1,0)) AS new
+FROM serie
+JOIN episode ON episode.idSerie = serie.id
+JOIN genre ON genre.idSerie = serie.id
+WHERE genre.nom=:genre
+GROUP BY serie.id
+ORDER BY new DESC,serie.premiere DESC;
+
+
+################################ Page Catégories ###############################
+
+### get_all_categories
+# Obtient la liste de toutes les catégories, avec le nombre de séries.
+# On triera les catégories de la plus représentée à la moins présente
+#
+# Champs attendus
+#   nom           de la catégorie
+#   count         nombre de séries de la catégorie
+
+SELECT genre.nom, COUNT(*) AS count
+FROM genre
+JOIN serie ON genre.idSerie = serie.id
+GROUP BY genre.nom
+ORDER BY count DESC;
 
 
 ################################ Page série ####################################
@@ -44,6 +88,17 @@ LIMIT :limit;
 SELECT * FROM serie
 WHERE id=:id;
 
+### get_genre
+# Obtient l ensemble de tous les genres associés à une série
+#
+# Paramètre
+#    :id       id de la série
+#
+# Champs attendus
+#    nom      nom du tag
+
+SELECT nom FROM genre
+WHERE idSerie=:id;
 
 ### get_cast
 # Obtient les paires rôles/acteurs pour une série donnée

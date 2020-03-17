@@ -51,6 +51,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 $route['search'] = 'search/query';
+$route['category/(:any)'] = 'category/query/$1';
+$route['category'] = 'category';
+
 
 $route['serie/update/(:num)/(:num)'] = 'show/update/$1/$2';
 $route['serie/update/(:num)'] = 'show/update/$1/1';
