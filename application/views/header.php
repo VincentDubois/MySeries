@@ -22,6 +22,8 @@ $this->load->helper(['url','html']); ?>
     </a>
 <!--    <a href="#" class="btn btn-primary">Calendrier</a>-->
     <a href="<?= site_url('search/'); ?>" class="btn btn-primary">Rechercher</a>
+    <a href="<?= site_url('category/'); ?>" class="btn btn-primary">Catégories</a>
+
     <?php if (isset($email)):?>
       <a href="<?= site_url('home');?>" class="btn btn-primary">Perso</a>
     <?php endif;?>

@@ -3,7 +3,7 @@
 ############################## Page d accueil #################################
 
 ### get_all_series
-# Obtient les images de toutes les séries.
+# Obtient les informations de toutes les séries.
 # On triera les séries par age décroissant, et on retourne toutes les données
 # des séries
 #
@@ -18,8 +18,43 @@
 #
 # Champs attendus
 #   serie         tous
-#   new           le nombre d épisodes sortis
+#   new           le nombre d épisodes sortis (optionnel)
 
+
+# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
+# commentaires situé au dessus
+
+
+### get_series_by_genre
+# Obtient les mêmes informations que la requête précédente, mais uniquement pour
+# les séries d un genre.
+#
+# Optionnel :
+#   On fournit en plus le nombre d épisodes sortis depuis
+#   la dernière connection
+#
+#
+# Paramètre
+#   :genre        Le genre à afficher
+#   :lastVisit    Dernière connection
+#
+# Champs attendus
+#   serie         tous
+#   new           le nombre d épisodes sortis (optionnel)
+
+# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
+# commentaires situé au dessus
+
+
+################################ Page Catégories ###############################
+
+### get_all_categories
+# Obtient la liste de toutes les catégories, avec le nombre de séries.
+# On triera les catégories de la plus représentée à la moins présente
+#
+# Champs attendus
+#   nom           de la catégorie
+#   count         nombre de séries de la catégorie
 
 # Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
 # commentaires situé au dessus
@@ -41,6 +76,17 @@
 # Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
 # commentaires situé au dessus
 
+### get_genre
+# Obtient l ensemble de tous les genres associés à une série
+#
+# Paramètre
+#    :id       id de la série
+#
+# Champs attendus
+#    nom      nom du tag
+
+# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
+# commentaires situé au dessus
 
 ### get_cast
 # Obtient les paires rôles/acteurs pour une série donnée
@@ -62,6 +108,8 @@
 ### get_season_list
 # Obtient la liste des saisons pour une série donnée
 # Pour chaque saison, on souhaite connaître aussi le nombre d épisodes
+# et la durée totale (optionnelle) sous forme heures:minutes:secondes (utilisez
+# la fonction SEC_TO_TIME)
 #
 # Paramètre
 #    :id       id de la série
@@ -69,6 +117,7 @@
 # Champs attendus
 #    saison
 #    nb        nombre d épisodes
+#    total     durée totale
 #    debut     date du premier épisode
 #    fin       date du dernier épisode
 

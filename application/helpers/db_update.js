@@ -168,9 +168,15 @@ class Query {
     this.episode.addField(new Field("resume","text","summary"));
     this.episode.addField(new Field("numero","int(11)","number"));
     this.episode.addField(new Field("saison","int(11)","season"));
+    this.episode.addField(new Field("duree","int(11)","runtime"));
     this.episode.addField(new Field("premiere","date","airdate"));
     this.episode.addField(new Field("urlImage","varchar(255)","image.medium"));
     this.episode.addField(new Field("url","varchar(255)","url"));
+
+    this.genre = new Table("genre");
+    this.genre.addField(new Field("id","int(11) NOT NULL","id"));
+    this.genre.addField(new Field("idSerie","int(11) NOT NULL","idSerie"));
+    this.genre.addField(new Field("nom","varchar(255) NOT NULL","name"));
 
     this.poste = new Table("poste");
     this.poste.addField(new Field("idSerie","int(11) NOT NULL","idSerie"),this.serie);
@@ -253,6 +259,15 @@ class Query {
             this.episode.add(episodes[i]);
           }
 
+
+          const genres = result.genres;
+          for(let i = 0; i< genres.length;++i){
+            this.genre.add({id:id*10+i,
+              idSerie:id,
+              name:genres[i]});
+          }
+
+
           this.selection = this.selection.includes(id) ? this.selection : [id].concat(this.selection);
 
           console.log(query.downloadSQLFile());
@@ -289,6 +304,7 @@ class Query {
     result+=this.personnage.generateCreateStatement();
     result+=this.jouer.generateCreateStatement();
     result+=this.episode.generateCreateStatement();
+    result+=this.genre.generateCreateStatement();
     result+=this.poste.generateCreateStatement();
 
     // On désactive les vérifications de clefs étrangères pour utiliser REPLACE
@@ -299,6 +315,7 @@ class Query {
     result+=this.personnage.generateAllInsert();
     result+=this.jouer.generateAllInsert();
     result+=this.episode.generateAllInsert();
+    result+=this.genre.generateAllInsert();
     result+=this.poste.generateAllInsert();
 
     // On réactive. Ou pas

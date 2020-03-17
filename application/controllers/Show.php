@@ -11,10 +11,11 @@ class Show extends CI_Controller {
 		$this->load->model('serie');
 
 		$this->my_queries->require('get_serie');
-		
+
 	  $data=$this->user->get_logged_user();
 
 		$data['serie'] = $this->serie->get($id_serie);
+		$data['genre'] =  $this->serie->get_genre($id_serie);
 		$data['cast'] = $this->serie->get_cast($id_serie);
 		$data['crew'] = $this->serie->get_crew_list($id_serie);
 		$data['season'] = $this->serie->get_season_list($id_serie);

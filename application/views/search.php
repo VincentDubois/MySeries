@@ -12,6 +12,7 @@ $this->load->helper(['url','html']); ?>
    </div>
  </form>
 
+
    <?php if (isset($serie_list)): ?>
   <div class="container">
    <div class="columns">

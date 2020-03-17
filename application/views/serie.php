@@ -28,6 +28,9 @@ $this->load->helper(['url','html','image_cache']);?>
 
             <p class="text-dark text-justify bg-gray">
               <?php echo $serie->resume; ?>
+              <?php foreach($genre as $tag): ?>
+                <a href="<?=site_url('category/'.$tag->nom); ?>"><span class="label label-rounded label-secondary"><?=$tag->nom?></span></a>
+              <?php endforeach; ?>
               <h6 class="text-gray m-2"><form action="<?php echo site_url('serie/update/'.$serie->id.'/'.$saison); ?>" method="post">
                 <button action="submit" name="update" class="btn btn-action s-circle">
                   <i class="icon icon-refresh"></i></button>
@@ -66,7 +69,17 @@ $this->load->helper(['url','html','image_cache']);?>
 </ul>
 </div>
 <div class="panel-title label h5 label-rounded label-primary p-2 m-2"> Saison <?=$saison?> <span class="h6 text-gray">
-  <?php foreach($season as $s) if($s->saison==$saison) echo substr($s->debut,0,4).' ('.$s->nb.' episodes)';?>
+  <?php foreach($season as $s) if($s->saison==$saison){
+      if (isset($s->debut) && $s->debut != 0)
+        echo substr($s->debut,0,4).' ('.$s->nb.' episodes)';
+      if (isset($s->total)) {
+          $total = explode(':',$s->total);
+          $heures = $total[0]+0;
+          $minutes = $total[1]+0;
+          echo " $heures heures $minutes minutes";
+      }
+    }
+  ;?>
   </span></div>
    <div class="timeline panel-body text-dark py-2">
        <?php foreach($episode as $element): ?>
@@ -85,7 +98,10 @@ $this->load->helper(['url','html','image_cache']);?>
                             <span class="h5 text-primary">
                             <?php echo $element->nom;?> </span>
                             <span class="h6 text-gray">
-                            <?php echo "Diffusion le " . date("d/m/Y",strtotime($element->premiere)) ;?>
+                            <?php echo "Diffusion le " . date("d/m/Y",strtotime($element->premiere)) ;
+                                if (isset($element->duree) && $element->duree != 0) echo ' durée '.$element->duree."'";
+                            ?>
+
                           </span>
                           <?php if(isset($element->vu)):?>
                             <label class="form-checkbox float-right">
