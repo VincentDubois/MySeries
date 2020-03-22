@@ -72,27 +72,35 @@ Si vous ne disposez pas de php en ligne de commande ou si vous voulez un héberg
 il est possible d'utiliser votre serveur web (en local ou chez un hébergeur). Pour cela il faut :
 
 1) Vérifier que le répertoire contenant le site est placé dans votre 'documentRoot'
-(ex : /var/www/ sous Linux), le déplacer si nécessaire. Par défaut, le site est dans un répertoire
-MySeries si vous avez fait un git clone comme demandé plus haut
+   (ex : /var/www/ sous Linux), le déplacer si nécessaire. Par défaut, le site est dans un répertoire
+   MySeries si vous avez fait un git clone comme demandé plus haut
 
-2) Editez dans le fichier application/config/config.php le passage suivant ::
+2) Editez dans le fichier application/config/config.php le passage suivant
 
-  $config['base_url'] = '';
-  if ($_SERVER['SERVER_PORT']!==80){
-    $config['base_url'] = 'http://'. $_SERVER['HTTP_HOST'].'/';
-  }
+::
+
+     $config['base_url'] = '';
+     if ($_SERVER['SERVER_PORT']!==80){
+       $config['base_url'] = 'http://'. $_SERVER['HTTP_HOST'].'/';
+     }
  
-Il faut ajout au 'base_url' le chemin de l'application ('MySeries' par défaut, adaptez
-si nécesaire). Par exemple ::
+   Il faut ajouter au 'base_url' le chemin de l'application ('MySeries' par défaut, adaptez
+   si nécesaire). Par exemple
 
-  $config['base_url'] = '';
-  if ($_SERVER['SERVER_PORT']!==80){
-    $config['base_url'] = 'http://'. $_SERVER['HTTP_HOST'].'/MySeries';
-  }
+::
 
-3) Donnez la propriété et/ou les droits de modification à Apache pour le répertoire 'public' et ses sous-répertoires. Cela est nécessaire pour que les images soient récupérées et cachées en local. Par exemple sous Linux ::
+     $config['base_url'] = '';
+     if ($_SERVER['SERVER_PORT']!==80){
+       $config['base_url'] = 'http://'. $_SERVER['HTTP_HOST'].'/MySeries';
+     }
 
-  chown -R www-data:www-data public
+3) Donnez la propriété et/ou les droits de modification à Apache pour le répertoire 'public' et ses
+   sous-répertoires. Cela est nécessaire pour que les images soient récupérées et cachées en local. Par
+   exemple sous Linux
+
+::
+
+     chown -R www-data:www-data public
 
 
 *******
