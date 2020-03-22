@@ -83,9 +83,10 @@ il est possible d'utiliser votre serveur web (en local ou chez un hébergeur). P
      if ($_SERVER['SERVER_PORT']!==80){
        $config['base_url'] = 'http://'. $_SERVER['HTTP_HOST'].'/';
      }
+
  
-   Il faut ajouter au 'base_url' le chemin de l'application ('MySeries' par défaut, adaptez
-   si nécesaire). Par exemple
+Il faut ajouter au 'base_url' le chemin de l'application ('MySeries' par défaut, adaptez
+si nécesaire). Par exemple
 
 ::
 
