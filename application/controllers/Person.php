@@ -11,7 +11,7 @@ class Person extends CI_Controller {
     $this->load->model('personne');
 	  $data=$this->user->get_logged_user();
 
-		$this->my_queries->require('get_person');
+		$this->my_queries->require_query('get_person');
 
 		$data['personne'] = $this->personne->get($id_personne);
 		$data['serie'] = $this->personne->get_series($id_personne);

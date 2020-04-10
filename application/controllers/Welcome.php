@@ -39,7 +39,7 @@ class Welcome extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->model('user');
 
-		$this->my_queries->require('check_user');
+		$this->my_queries->require_query('check_user');
 
 		$this->user->login();
 		if ($this->user->is_logged() &&
