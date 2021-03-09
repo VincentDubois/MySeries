@@ -10,7 +10,7 @@ class Show extends CI_Controller {
     $this->load->model('user');
 		$this->load->model('serie');
 
-		$this->my_queries->require('get_serie');
+		$this->my_queries->require_query('get_serie');
 
 	  $data=$this->user->get_logged_user();
 

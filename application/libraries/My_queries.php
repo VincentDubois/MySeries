@@ -77,7 +77,7 @@ class My_queries {
     return isset($this->queries[$name]) && strlen(trim($this->queries[$name]))>0;
   }
 
-  public function require($name){
+  public function require_query($name){
     if (!isset($this->queries[$name])){
         show_error("Requete non trouvée : $name\n".
                   "Vous avez probablement supprimé le commentaire correspondant ".
