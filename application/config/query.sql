@@ -20,9 +20,13 @@
 #   serie         tous
 #   new           le nombre d épisodes sortis (optionnel)
 
-
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+SELECT serie.*,
+  SUM(IF(episode.premiere>=:lastVisit AND episode.premiere<=CURDATE(),1,0)) AS new
+FROM serie
+JOIN episode ON episode.idSerie = serie.id
+GROUP BY serie.id
+ORDER BY new DESC,serie.premiere DESC
+LIMIT :limit;
 
 
 ### get_series_by_genre
@@ -42,8 +46,14 @@
 #   serie         tous
 #   new           le nombre d épisodes sortis (optionnel)
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+SELECT serie.*,
+  SUM(IF(episode.premiere>=:lastVisit AND episode.premiere<=CURDATE(),1,0)) AS new
+FROM serie
+JOIN episode ON episode.idSerie = serie.id
+JOIN genre ON genre.idSerie = serie.id
+WHERE genre.nom=:genre
+GROUP BY serie.id
+ORDER BY new DESC,serie.premiere DESC;
 
 
 ################################ Page Catégories ###############################
@@ -56,8 +66,11 @@
 #   nom           de la catégorie
 #   count         nombre de séries de la catégorie
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+SELECT genre.nom, COUNT(*) AS count
+FROM genre
+JOIN serie ON genre.idSerie = serie.id
+GROUP BY genre.nom
+ORDER BY count DESC;
 
 
 ################################ Page série ####################################
@@ -72,9 +85,8 @@
 # Champs attendus
 #    serie     tous
 
-
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+SELECT * FROM serie
+WHERE id=:id;
 
 ### get_genre
 # Obtient l ensemble de tous les genres associés à une série
@@ -85,8 +97,8 @@
 # Champs attendus
 #    nom      nom du tag
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+SELECT nom FROM genre
+WHERE idSerie=:id;
 
 ### get_cast
 # Obtient les paires rôles/acteurs pour une série donnée
@@ -102,8 +114,11 @@
 #    a_id      id de l acteur
 #    a_nom     nom de l acteur
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+SELECT personnage.urlImage AS p_image,personnage.nom AS p_nom,
+       personne.id AS a_id, personne.nom AS a_nom FROM jouer
+JOIN personnage ON jouer.idPersonnage = personnage.id
+JOIN personne ON jouer.idPersonne = personne.id
+WHERE idSerie=:id;
 
 ### get_season_list
 # Obtient la liste des saisons pour une série donnée
@@ -121,8 +136,12 @@
 #    debut     date du premier épisode
 #    fin       date du dernier épisode
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+SELECT saison, MAX(numero) AS nb, SEC_TO_TIME(SUM(duree*60)) AS total,
+       MIN(premiere) AS debut, MAX(premiere) AS fin
+FROM episode
+WHERE idSerie=:id
+GROUP BY saison
+ORDER BY saison;
 
 ### get_episode_list
 # Obtient la liste des episodes pour une série donnée,
@@ -135,8 +154,9 @@
 # Champs attendus
 #    episode   tous
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+SELECT * FROM episode
+WHERE idSerie=:id AND saison=:saison
+ORDER BY saison,numero;
 
 ### get_crew_list
 # Obtient la liste des membres de l équipe de tournage
@@ -148,8 +168,9 @@
 #    poste et personne   tous (il n y a pas de problème de champ ambigus
 #                              donc pas d alias)
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+SELECT * FROM poste
+JOIN personne ON personne.id = poste.idPersonne
+WHERE idSerie=:id;
 
 ### get_next_episode
 # Retourne le premier épisode diffusé aujourd hui ou le plus tôt après
@@ -160,8 +181,10 @@
 # Champs attendus
 #    episode           tous
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+SELECT * FROM episode
+WHERE idSerie = :id AND premiere>CURDATE()
+ORDER BY premiere ASC
+LIMIT 1;
 
 ####################### Page sur une personnes #################################
 
@@ -171,8 +194,8 @@
 # Paramètre
 #    :id
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+SELECT * FROM personne
+WHERE id=:id;
 
 
 ### get_actor_role
@@ -189,8 +212,11 @@
 #    p_nom     nom du personnage
 
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+SELECT serie.id AS s_id, serie.nom AS s_nom, serie.urlImage AS s_image,
+      personnage.nom AS p_nom, personnage.urlImage AS p_image FROM jouer
+JOIN personnage ON jouer.idPersonnage=personnage.id
+JOIN serie ON jouer.idSerie = serie.id
+WHERE idPersonne=:id;
 
 ### get_crew_role
 # Obtient la liste des postes occuppés dans les équipes des séries
@@ -204,8 +230,10 @@
 #    s_nom     nom de la série
 #    s_image   urlImage de la série
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+SELECT serie.id AS s_id, serie.nom AS s_nom, serie.urlImage AS s_image, titre
+FROM poste
+JOIN serie ON poste.idSerie = serie.id
+WHERE idPersonne=:id;
 
 
 
@@ -233,8 +261,8 @@
 #               mot de passe chiffré dans la base
 
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+SELECT id,PASSWORD(:password)=password AS ok, lastVisit FROM user
+  WHERE email = :email;
 
 ### register_user
 # Ajoute un utilisateur dans la base de données. Il faut configurer
@@ -251,8 +279,8 @@
 #   :password
 #
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+INSERT INTO user(email,password,lastVisit)
+  VALUES (:email,PASSWORD(:password),CURDATE());
 
 ### update_visit
 # Mets à jour la date de dernière visite d un utilisateur
@@ -260,8 +288,9 @@
 # Paramètres
 #    :id       id de l utilisateur
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+UPDATE user
+SET lastVisit=CURDATE()
+WHERE id=:id;
 
 
 ###################### Gestion des séries suivies #############################
@@ -277,8 +306,7 @@
 #   :idUser
 #   :idSerie
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+INSERT INTO suivre(idUser,idSerie) VALUES (:idUser,:idSerie);
 
 ### unfollow
 # Indique qu un utilisateur ne suit plus une serie
@@ -290,8 +318,8 @@
 #   :idUser
 #   :idSerie
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+DELETE FROM suivre
+WHERE idUser=:idUser AND idSerie=:idSerie;
 
 ### isFollowing
 # Indique si un utilisateur suit une série. On considère que le résultat
@@ -305,8 +333,8 @@
 #   :idUser
 #   :idSerie
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+SELECT * FROM suivre
+WHERE idUser=:idUser AND idSerie=:idSerie;
 
 
 ############################### Gestion des épisodes vus ######################
@@ -322,8 +350,7 @@
 #   :idUser
 #   :idEpisode
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+INSERT INTO vu(idUser,idEpisode) VALUES (:idUser,:idEpisode);
 
 ### unwatched
 # Retire un épisode des episodes vus
@@ -335,8 +362,8 @@
 #   :idUser
 #   :idEpisode
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+DELETE FROM vu
+WHERE idUser=:idUser AND idEpisode=:idEpisode;
 
 ### get_episode_list_vu
 # Obtient la liste des episodes pour une série donnée
@@ -355,8 +382,10 @@
 #    episode     tous les champs
 #    vu          (booleén) vrai si l épisode a été vu
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+SELECT episode.*, vu.idUser IS NOT NULL AS vu FROM episode
+LEFT JOIN vu ON vu.idEpisode = episode.id AND vu.idUser=:userId
+WHERE idSerie=:id AND saison=:saison
+ORDER BY saison,numero;
 
 ### get_followed_series
 # Obtient les données de toutes les séries suivies.
@@ -374,8 +403,13 @@
 #    total     nombre total d épisodes dans la série
 #    reste     le nombre d épisodes non vus
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+SELECT serie.*, COUNT(*) AS total, SUM(IF(vu.idUser IS NULL,1,0)) AS reste FROM serie
+JOIN suivre ON suivre.idSerie=serie.id
+JOIN episode ON episode.idSerie=serie.id
+LEFT JOIN vu ON vu.idEpisode=episode.id AND vu.idUser = suivre.idUser
+WHERE suivre.idUser = :userId
+GROUP BY serie.id
+ORDER BY reste DESC, serie.premiere DESC;
 
 ### get_next_episode_user
 # Obtient les infos des episodes non encore vus de chaque série suivie
@@ -390,5 +424,11 @@
 # Champs attendus
 #    episode     tous les champs
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+SELECT episode.* FROM episode
+JOIN suivre ON suivre.idSerie = episode.idSerie
+WHERE suivre.idUser = :userId AND
+  episode.id NOT IN (
+    SELECT vu.idEpisode FROM vu
+    WHERE vu.idUser = :userId
+  )
+ORDER BY episode.idSerie,episode.saison,episode.numero ;
