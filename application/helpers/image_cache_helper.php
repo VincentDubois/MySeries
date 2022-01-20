@@ -4,7 +4,7 @@ $this->load->helper(['url','html']);
 
 function url_to_path($url,$default = 'portrait'){
   if ($url==NULL) $url='public/img/medium_'.$default.'.png';
-  if(preg_match('[http://static.tvmaze.com/uploads/images/(.+)]i', $url,$result)) {
+  if(preg_match('[https?://static.tvmaze.com/uploads/images/(.+)]i', $url,$result)) {
     $path = $result[1];
     $path = str_replace('/','_',$path);
     return 'public/img/'.$path;
