@@ -18,7 +18,7 @@ $fp = fopen ($file, 'w+') or die('Unable to write a file');
 // file to download
 $ch = curl_init($url);
 // enable SSL if needed
-//curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 // output to file descriptor
 curl_setopt($ch, CURLOPT_FILE, $fp);
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
