@@ -4,7 +4,7 @@
 
 ### get_all_series
 # Obtient les informations de toutes les séries.
-# On triera les séries par age décroissant, et on retourne toutes les données
+# On triera les séries par age croissant, et on retourne toutes les données
 # des séries
 #
 # Optionnel :
@@ -20,9 +20,8 @@
 #   serie         tous
 #   new           le nombre d épisodes sortis (optionnel)
 
-SELECT *
-FROM serie
-ORDER BY serie.premiere DESC;
+# Décommentez la ligne suivante, qui répond à la première partie de la question :
+# SELECT * FROM serie ORDER BY serie.premiere DESC;
 
 
 ################################ Page Catégories ###############################
