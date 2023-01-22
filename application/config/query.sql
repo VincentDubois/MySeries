@@ -20,30 +20,9 @@
 #   serie         tous
 #   new           le nombre d épisodes sortis (optionnel)
 
-
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
-
-
-### get_series_by_genre
-# Obtient les mêmes informations que la requête précédente, mais uniquement pour
-# les séries d un genre.
-#
-# Optionnel :
-#   On fournit en plus le nombre d épisodes sortis depuis
-#   la dernière connection
-#
-#
-# Paramètre
-#   :genre        Le genre à afficher
-#   :lastVisit    Dernière connection
-#
-# Champs attendus
-#   serie         tous
-#   new           le nombre d épisodes sortis (optionnel)
-
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+SELECT *
+FROM serie
+ORDER BY serie.premiere DESC;
 
 
 ################################ Page Catégories ###############################
@@ -56,25 +35,42 @@
 #   nom           de la catégorie
 #   count         nombre de séries de la catégorie
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+# Remplacez cette ligne par la requête (sans le # au début). Laissez les autres commentaires
+
+
+### get_series_by_genre
+# Obtient les mêmes informations que la requête get_all_series, mais uniquement pour
+# les séries d un genre. (Affiché quand on clique sur un des genres dans
+# La liste des genres ou sur la page d une série)
+#
+# Optionnel :
+#   On retourne en plus le nombre d épisodes sortis depuis
+#   la dernière connection
+#
+#
+# Paramètre
+#   :genre        Le genre à afficher
+#   :lastVisit    Dernière connection
+#
+# Champs attendus
+#   serie         tous
+#   new           le nombre d épisodes sortis (optionnel)
+
+# Remplacez cette ligne par la requête (sans le # au début). Laissez les autres commentaires
 
 
 ################################ Page série ####################################
-
 
 ### get_serie
 # Obtient toutes les informations sur une série
 #
 # Paramètre
-#    :id       id de la série à retourner
+#    :id       id de la série demandée
 #
 # Champs attendus
 #    serie     tous
 
-
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+# Remplacez cette ligne par la requête (sans le # au début). Laissez les autres commentaires
 
 ### get_genre
 # Obtient l ensemble de tous les genres associés à une série
@@ -83,10 +79,9 @@
 #    :id       id de la série
 #
 # Champs attendus
-#    nom      nom du tag
+#    nom      genre de la série
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+# Remplacez cette ligne par la requête (sans le # au début). Laissez les autres commentaires
 
 ### get_cast
 # Obtient les paires rôles/acteurs pour une série donnée
@@ -102,11 +97,10 @@
 #    a_id      id de l acteur
 #    a_nom     nom de l acteur
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+# Remplacez cette ligne par la requête (sans le # au début). Laissez les autres commentaires
 
 ### get_season_list
-# Obtient la liste des saisons pour une série donnée
+# Obtient la liste des saisons (dans l ordre...) pour une série donnée
 # Pour chaque saison, on souhaite connaître aussi le nombre d épisodes
 # et la durée totale (optionnelle) sous forme heures:minutes:secondes (utilisez
 # la fonction SEC_TO_TIME)
@@ -121,8 +115,7 @@
 #    debut     date du premier épisode
 #    fin       date du dernier épisode
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+# Remplacez cette ligne par la requête (sans le # au début). Laissez les autres commentaires
 
 ### get_episode_list
 # Obtient la liste des episodes pour une série donnée,
@@ -135,8 +128,7 @@
 # Champs attendus
 #    episode   tous
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+# Remplacez cette ligne par la requête (sans le # au début). Laissez les autres commentaires
 
 ### get_crew_list
 # Obtient la liste des membres de l équipe de tournage
@@ -148,8 +140,7 @@
 #    poste et personne   tous (il n y a pas de problème de champ ambigus
 #                              donc pas d alias)
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+# Remplacez cette ligne par la requête (sans le # au début). Laissez les autres commentaires
 
 ### get_next_episode
 # Retourne le premier épisode diffusé aujourd hui ou le plus tôt après
@@ -160,8 +151,7 @@
 # Champs attendus
 #    episode           tous
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+# Remplacez cette ligne par la requête (sans le # au début). Laissez les autres commentaires
 
 ####################### Page sur une personnes #################################
 
@@ -171,8 +161,7 @@
 # Paramètre
 #    :id
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+# Remplacez cette ligne par la requête (sans le # au début). Laissez les autres commentaires
 
 
 ### get_actor_role
@@ -189,8 +178,7 @@
 #    p_nom     nom du personnage
 
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+# Remplacez cette ligne par la requête (sans le # au début). Laissez les autres commentaires
 
 ### get_crew_role
 # Obtient la liste des postes occuppés dans les équipes des séries
@@ -204,8 +192,7 @@
 #    s_nom     nom de la série
 #    s_image   urlImage de la série
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+# Remplacez cette ligne par la requête (sans le # au début). Laissez les autres commentaires
 
 
 
@@ -213,7 +200,7 @@
 
 ### check_user
 # Obtient les informations de connection d un utilisateur,
-# à partir de son email.
+# à partir de son email et son mot de passe.
 #
 # Utilisation
 #   permet de tester si un utilisateur existe, et le cas échéant de
@@ -225,6 +212,7 @@
 #
 # Paramètre
 #   :email
+#   :password
 #
 # Retourne les champs suivants :
 #   id
@@ -233,8 +221,7 @@
 #               mot de passe chiffré dans la base
 
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+# Remplacez cette ligne par la requête (sans le # au début). Laissez les autres commentaires
 
 ### register_user
 # Ajoute un utilisateur dans la base de données. Il faut configurer
@@ -243,7 +230,7 @@
 # le même email dans la base
 #
 # Remarque
-#   La fonction PASSWORD() permet de chiffrer un mot de passe
+#   La fonction SHA1() permet de chiffrer un mot de passe
 #   La fonction CURDATE() permet d obtenir la date actuelle
 #
 # Paramètres
@@ -251,8 +238,7 @@
 #   :password
 #
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+# Remplacez cette ligne par la requête (sans le # au début). Laissez les autres commentaires
 
 ### update_visit
 # Mets à jour la date de dernière visite d un utilisateur
@@ -260,8 +246,7 @@
 # Paramètres
 #    :id       id de l utilisateur
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+# Remplacez cette ligne par la requête (sans le # au début). Laissez les autres commentaires
 
 
 ###################### Gestion des séries suivies #############################
@@ -277,8 +262,7 @@
 #   :idUser
 #   :idSerie
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+# Remplacez cette ligne par la requête (sans le # au début). Laissez les autres commentaires
 
 ### unfollow
 # Indique qu un utilisateur ne suit plus une serie
@@ -290,8 +274,7 @@
 #   :idUser
 #   :idSerie
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+# Remplacez cette ligne par la requête (sans le # au début). Laissez les autres commentaires
 
 ### isFollowing
 # Indique si un utilisateur suit une série. On considère que le résultat
@@ -305,8 +288,7 @@
 #   :idUser
 #   :idSerie
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+# Remplacez cette ligne par la requête (sans le # au début). Laissez les autres commentaires
 
 
 ############################### Gestion des épisodes vus ######################
@@ -322,8 +304,7 @@
 #   :idUser
 #   :idEpisode
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+# Remplacez cette ligne par la requête (sans le # au début). Laissez les autres commentaires
 
 ### unwatched
 # Retire un épisode des episodes vus
@@ -335,8 +316,7 @@
 #   :idUser
 #   :idEpisode
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+# Remplacez cette ligne par la requête (sans le # au début). Laissez les autres commentaires
 
 ### get_episode_list_vu
 # Obtient la liste des episodes pour une série donnée
@@ -355,8 +335,7 @@
 #    episode     tous les champs
 #    vu          (booleén) vrai si l épisode a été vu
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+# Remplacez cette ligne par la requête (sans le # au début). Laissez les autres commentaires
 
 ### get_followed_series
 # Obtient les données de toutes les séries suivies.
@@ -374,8 +353,7 @@
 #    total     nombre total d épisodes dans la série
 #    reste     le nombre d épisodes non vus
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+# Remplacez cette ligne par la requête (sans le # au début). Laissez les autres commentaires
 
 ### get_next_episode_user
 # Obtient les infos des episodes non encore vus de chaque série suivie
@@ -390,5 +368,4 @@
 # Champs attendus
 #    episode     tous les champs
 
-# Remplacez ces lignes par votre requête. Ne modifiez pas le bloc de
-# commentaires situé au dessus
+# Remplacez cette ligne par la requête (sans le # au début). Laissez les autres commentaires
