@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  php-apache-environment:
+    container_name: php-apache-series
+    build:
+        context: ./php
+        dockerfile: Dockerfile
+    depends_on:
+      - db
+    volumes:
+      - ../:/var/www/html/
+    environment:
+        MYSQL_HOST: db
+    env_file:
+       - 'db.env'
+    ports:
+      - 8080:80
+  db:
+    container_name: db-series
+    image: mysql
+    restart: always
+    volumes:
+      - ../database:/docker-entrypoint-initdb.d
+    env_file:
+       - 'db.env'
+    ports:
+        - ${DB_PORT}:3306
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+        - 9090:80
+    restart: always
+    environment:
+        PMA_HOST: db
+    depends_on:
+        - db
