@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.9'
 services:
   php-apache-environment:
     container_name: php-apache-series
@@ -9,6 +9,8 @@ services:
       - db
     volumes:
       - ../:/var/www/html/
+      - ./database.php:/var/www/html/application/config/database.php
+    command:  [sh, -c, "composer install && apache2-foreground"]
     environment:
         MYSQL_HOST: db
     env_file:
