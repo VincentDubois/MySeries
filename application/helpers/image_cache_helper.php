@@ -18,7 +18,7 @@ $fp = fopen ($file, 'w+') or die('Unable to write a file');
 // file to download
 $ch = curl_init($url);
 // enable SSL if needed
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+//curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 // output to file descriptor
 curl_setopt($ch, CURLOPT_FILE, $fp);
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
@@ -26,10 +26,13 @@ curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 curl_setopt($ch, CURLOPT_TIMEOUT, 1000);
 curl_setopt($ch, CURLOPT_USERAGENT, 'any');
 // Enable debug output
-curl_setopt($ch, CURLOPT_VERBOSE, true);
+curl_setopt($ch, CURLOPT_VERBOSE, false);
 curl_exec($ch);
 curl_close($ch);
 fclose($fp);
+
+usleep(100);
+return file_exists($file);
 }
 
 function cache_image($url,$default='portrait'){
