@@ -26,10 +26,13 @@ curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 curl_setopt($ch, CURLOPT_TIMEOUT, 1000);
 curl_setopt($ch, CURLOPT_USERAGENT, 'any');
 // Enable debug output
-curl_setopt($ch, CURLOPT_VERBOSE, true);
+curl_setopt($ch, CURLOPT_VERBOSE, false);
 curl_exec($ch);
 curl_close($ch);
 fclose($fp);
+
+usleep(100);
+return file_exists($file);
 }
 
 function cache_image($url,$default='portrait'){
