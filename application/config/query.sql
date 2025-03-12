@@ -207,7 +207,7 @@
 #   permet de récupérer la dernière date de connection
 #
 # Remarque
-#   La fonction PASSWORD() permet de chiffrer un mot de passe
+#   La fonction SHA1() permet de chiffrer un mot de passe
 #
 # Paramètre
 #   :email
