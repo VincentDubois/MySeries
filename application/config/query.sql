@@ -261,7 +261,7 @@ WHERE idPersonne=:id;
 #               mot de passe chiffré dans la base
 
 
-SELECT id,PASSWORD(:password)=password AS ok, lastVisit FROM user
+SELECT id,SHA1(:password)=password AS ok, lastVisit FROM user
   WHERE email = :email;
 
 ### register_user
@@ -271,7 +271,7 @@ SELECT id,PASSWORD(:password)=password AS ok, lastVisit FROM user
 # le même email dans la base
 #
 # Remarque
-#   La fonction PASSWORD() permet de chiffrer un mot de passe
+#   La fonction SHA1() permet de chiffrer un mot de passe
 #   La fonction CURDATE() permet d obtenir la date actuelle
 #
 # Paramètres
@@ -280,7 +280,7 @@ SELECT id,PASSWORD(:password)=password AS ok, lastVisit FROM user
 #
 
 INSERT INTO user(email,password,lastVisit)
-  VALUES (:email,PASSWORD(:password),CURDATE());
+  VALUES (:email,SHA1(:password),CURDATE());
 
 ### update_visit
 # Mets à jour la date de dernière visite d un utilisateur

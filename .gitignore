@@ -1,38 +1,42 @@
-.DS_Store
-user_guide
-application/config/database.php
-application/cache/*
-application/helpers/node_modules
-application/helpers/package-lock.json
-public/img/medium*
-!application/cache/index.html
+/cache/
 
-application/logs/*
-!application/logs/index.html
-
-!application/*/.htaccess
-
-composer.lock
-
-node_modules/
-package-lock.json
-
-user_guide_src/build/*
-user_guide_src/cilexer/build/*
-user_guide_src/cilexer/dist/*
-user_guide_src/cilexer/pycilexer.egg-info/*
+test/log/*
+##### Composer
+composer.phar
 /vendor/
 
-# IDE Files
-#-------------------------
-/nbproject/
-.idea/*
+#### backup files
+*~
+*.bak
+._*
+.nfs*
 
-## Sublime Text cache files
-*.tmlanguage.cache
-*.tmPreferences.cache
-*.stTheme.cache
-*.sublime-workspace
-*.sublime-project
-/tests/tests/
-/tests/results/
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+##### Dropbox
+# Dropbox settings and caches
+.dropbox
+.dropbox.attr
+.dropbox.cache
+
+##### VisualStudioCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+.history/
+
+##### NetBeans
+**/nbproject/private/
+**/nbproject/Makefile-*.mk
+**/nbproject/Package-*.bash
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/

@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   php-apache-environment:
-    container_name: php-apache-series
+    container_name: php-apache-myseries
     build:
         context: ./php
         dockerfile: Dockerfile
@@ -9,16 +9,17 @@ services:
       - db
     volumes:
       - ../:/var/www/html/
-      - ./database.php:/var/www/html/application/config/database.php
+      - ./php/config.php:/var/www/html/application/config/config.php
     command:  [sh, -c, "composer install && apache2-foreground"]
     environment:
         MYSQL_HOST: db
     env_file:
        - 'db.env'
     ports:
-      - 8080:80
+      - 8081:80
+
   db:
-    container_name: db-series
+    container_name: db-myseries
     image: mysql
     restart: always
     volumes:
@@ -28,6 +29,7 @@ services:
     ports:
         - ${DB_PORT}:3306
   phpmyadmin:
+    container_name: phpmyadmin-myseries
     image: phpmyadmin/phpmyadmin
     ports:
         - 9090:80

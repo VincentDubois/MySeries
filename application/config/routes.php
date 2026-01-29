@@ -1,72 +1,30 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+require_once 'application/core/routing.php';
 
-/*
-| -------------------------------------------------------------------------
-| URI ROUTING
-| -------------------------------------------------------------------------
-| This file lets you re-map URI requests to specific controller functions.
-|
-| Typically there is a one-to-one relationship between a URL string
-| and its corresponding controller class/method. The segments in a
-| URL normally follow this pattern:
-|
-|	example.com/class/method/id/
-|
-| In some instances, however, you may want to remap this relationship
-| so that a different class/function is called than the one
-| corresponding to the URL.
-|
-| Please see the user guide for complete details:
-|
-|	https://codeigniter.com/user_guide/general/routing.html
-|
-| -------------------------------------------------------------------------
-| RESERVED ROUTES
-| -------------------------------------------------------------------------
-|
-| There are three reserved routes:
-|
-|	$route['default_controller'] = 'welcome';
-|
-| This route indicates which controller class should be loaded if the
-| URI contains no data. In the above example, the "welcome" class
-| would be loaded.
-|
-|	$route['404_override'] = 'errors/page_missing';
-|
-| This route will tell the Router which controller/method to use if those
-| provided in the URL cannot be matched to a valid route.
-|
-|	$route['translate_uri_dashes'] = FALSE;
-|
-| This is not exactly a route, but allows you to automatically route
-| controller and method names that contain dashes. '-' isn't a valid
-| class or method name character, so it requires translation.
-| When you set this option to TRUE, it will replace ALL dashes in the
-| controller and method URI segments.
-|
-| Examples:	my-controller/index	-> my_controller/index
-|		my-controller/my-method	-> my_controller/my_method
-*/
+// Configuration des routes, c'est à dire l'association entre les pages demandées
+// et le code php à exécuter
 
-$route['search'] = 'search/query';
-$route['category/(:any)'] = 'category/query/$1';
-$route['category'] = 'category';
+// Le premier paramètre indique le fichier php à exécuter. Par exemple,
+// index correspond à pages/index.php
 
+// Les paramètres suivants indiquent les éventuels valeurs attendues et si il s'agit de GET ou POST
+// Le fichier php correspondant n'est lancé que si tous les paramètres
+// existent. Les paramètres validés sont automatiquement convertis
+// en variables php de même nom
+// Seule l'existence des paramètres est testée, pas leur valeur (c'est donc à vous de le faire)
 
-$route['serie/update/(:num)/(:num)'] = 'show/update/$1/$2';
-$route['serie/update/(:num)'] = 'show/update/$1/1';
-$route['serie/vu/(:num)/(:num)/(:num)'] = 'show/vu/$1/$2/$3';
-$route['serie/follow/(:num)/(:num)'] = 'show/follow/$1/$2';
-$route['serie/(:num)/(:num)'] = 'show/detail/$1/$2';
-$route['serie/(:num)'] = 'show/detail/$1/1';
+add_page('index');
 
-$route['personne/(:num)'] = 'person/detail/$1';
+add_page('serie', ['idSerie' => GET, 'saison?' => GET]);
+add_page('category', ['nom?' => GET] );
+add_page('personne', ['idPersonne' => GET] );
+//add_page('search', ['query' => GET]);
 
-$route['home/(:num)'] = 'home/vu/$1';
-$route['home'] = 'home';
+add_action('login', ['email' => POST, 'password' => POST]);
+add_page('home');
+add_action('logout');
 
-$route['default_controller'] = 'welcome';
-$route['404_override'] = '';
-$route['translate_uri_dashes'] = FALSE;
+add_action('follow', ['idSerie' => GET, 'saison' => GET, 'follow' => POST]);
+add_action('vu', ['idSerie?' => GET, 'saison?' => GET, 'numero?' => GET, 'idEpisode' => GET,  'vu?' => POST]);
+
+?>
