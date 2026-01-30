@@ -136,12 +136,13 @@ Il est probable qu’un certain nombre d’erreurs se glissent dans vos requêt
 tout tester au fur et à mesure, en utilisant chaque fonctionnalité du site dès que celle-ci est codée.
 
 Les messages d’erreurs vous indiquent normalement ce qui s’est (mal) passé. Voici les principaux cas :
-1. Erreurs SQL : dans ce cas, vous avez accès dans le message d’erreur à la requête avec ses paramètres
+
+1) Erreurs SQL : dans ce cas, vous avez accès dans le message d’erreur à la requête avec ses paramètres
    remplacés par les valeurs correspondantes, et l’erreur retournée par MySQL.
-2. Erreurs dans le nom d’un paramètre : le message vous précise normalement lequel
-3. Accès à une page reposant sur une requête qui n’a pas encore été écrite :
+2) Erreurs dans le nom d’un paramètre : le message vous précise normalement lequel
+3) Accès à une page reposant sur une requête qui n’a pas encore été écrite :
    normalement, c’est précisé dans le message
-4. Autres erreurs : il s’agit généralement d’une erreur dans les champs retournés
+4) Autres erreurs : il s’agit généralement d’une erreur dans les champs retournés
    (absents, ou mal nommés)
 
 Rappel : tout ce que vous avez à éditer est dans le fichier ‘query.sql’, vous n’avez rien d’autre à modifier
