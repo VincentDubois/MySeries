@@ -2,7 +2,7 @@
 Présentation
 ############
 
-Ce projet fait partie du cours de base de données du DUT MMI de l'IUT de Lens.
+Ce projet fait partie du cours de base de données du BUT MMI de l'IUT de Lens.
 Il s'agit d'un site permettant de naviguer dans une base de données sur les
 séries.
 Les données sont obtenues par l'API de TVMaze
