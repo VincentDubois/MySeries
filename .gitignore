@@ -1,5 +1,7 @@
 /cache/
 
+public/img/*
+
 test/log/*
 ##### Composer
 composer.phar
