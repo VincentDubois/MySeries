@@ -31,6 +31,9 @@ require_once 'application/core/database.php';
     global $queries;
 
     // On récupère la requête brute, avec des :champs dedans
+    if (!isset($queries[$name])){
+           erreur(500,"<h2>Requête non trouvée : <strong>$name</strong></h2>");
+        }
       $sql_query = $queries[$name];
     // Il faut maintenant la réécrire avec de ?, et fournir
     // le tableau de valeurs (dans l'ordre) correspondant à chaque paramètre
