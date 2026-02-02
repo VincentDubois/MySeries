@@ -1,10 +1,10 @@
 @extends('templates.erreur')
 @section('content')
 <div class="log">
-  <h1>404 Page introuvable</h1>
+  <h1>500 Erreur coté serveur</h1>
   @isset($log)
     <h2>Détail de l'erreur</h2>
-     <p><pre>{!!$log!!}</pre></p>
+    {!!$log!!}
   @endisset
   </div>
 @endsection

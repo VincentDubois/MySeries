@@ -54,9 +54,20 @@ require_once 'application/core/database.php';
       }
       // On exécute la requête modifiée, en passant le tableau de paramètres
       $pdo = get_pdo();
-      $query = $pdo->prepare($sql_query);
-      $query->execute($param);
-      return $query;
+
+      try {
+        $query = $pdo->prepare($sql_query);
+        $query->execute($param);
+        return $query;
+      } catch (Exception $e){
+        erreur(500,"<h2>Erreur dans la requête $name</h2>
+        <p>Requète récupérée :</p>
+        <code><pre>$sql_query</pre></code>
+        <p>Paramètres disponibles :</p>
+        <pre>".print_r($data,true)."</pre>
+        <p>Détail de l'erreur :</p>
+        <pre>".$e->getMessage()."</pre>");
+      }
       /*
 	    $query = $this->CI->db->query($sql_query, $param);
 
@@ -74,13 +85,13 @@ require_once 'application/core/database.php';
   function require_query($name){
     global $queries;
     if (!isset($queries[$name])){
-        show_error("Requete non trouvée : $name\n".
+        erreur(500,"Requete non trouvée : $name\n".
                   "Vous avez probablement supprimé le commentaire correspondant ".
                   "dans le fichier 'query.sql'");
     }
     $sql_query = $queries[$name];
     if (strlen(trim($sql_query))==0) {
-      show_error("Désolé, la requête '$name' est nécessaire au bon fonctionnement de cette page");
+      erreur(500,"Désolé, la requête '$name' est nécessaire au bon fonctionnement de cette page");
     }
   }
 
