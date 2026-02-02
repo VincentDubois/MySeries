@@ -43,7 +43,15 @@ require_once 'application/core/database.php';
     // Pour chaque correspondance, on extrait de $data la valeur,
       $param = [];
       foreach($params[1] as $p){
-        $param[] = $data[$p];
+        if (!isset($data[$p])){
+           erreur(500,"<h2>Erreur dans la requête <strong>$name</strong></h2>
+        <p>Requète récupérée :</p>
+        <code><pre>$sql_query</pre></code>
+        <p>Paramètres disponibles :</p>
+        <pre>".print_r($data,true)."</pre>
+        <p>Le paramètre <strong>:$p</strong> n'existe pas</p>");
+        }
+        $param[] = $data[$p]; 
       }
 
     // On remplace maintenant les :param de la requête par des ?
@@ -60,13 +68,13 @@ require_once 'application/core/database.php';
         $query->execute($param);
         return $query;
       } catch (Exception $e){
-        erreur(500,"<h2>Erreur dans la requête $name</h2>
+        erreur(500,"<h2>Erreur dans la requête <strong>$name</strong></h2>
         <p>Requète récupérée :</p>
-        <code><pre>$sql_query</pre></code>
+        <code><pre>$queries[$name]</pre></code>
         <p>Paramètres disponibles :</p>
         <pre>".print_r($data,true)."</pre>
         <p>Détail de l'erreur :</p>
-        <pre>".$e->getMessage()."</pre>");
+        <code>".$e->getMessage()."</code>");
       }
       /*
 	    $query = $this->CI->db->query($sql_query, $param);
