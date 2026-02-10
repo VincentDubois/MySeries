@@ -19,13 +19,11 @@ function get_pdo()
 			$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false );
 		}
 		catch(Exception $e) {
-			echo "Echec de la connexion à la base de données<br>";
-			echo "Paramètres de la connexion :";
-			print_r(compact(['MYSQL_HOST','MYSQL_DATABASE', 'MYSQL_USER', 'MYSQL_PASSWORD']));
-			echo "Message d'erreur reçu : <br>\n ".$e->getMessage()."<br>";
+			erreur(500,"<h2>Echec de la connexion à la base de données</h2>
+			Paramètres de la connexion :<pre>".print_r(compact('MYSQL_HOST', 'MYSQL_DATABASE', 'MYSQL_USER', 'MYSQL_PASSWORD'),true)
+			."</pre>Message d'erreur reçu : <pre>\n ".$e->getMessage()."</pre>");
 		}
 	}
-
 	return $pdo;
 }
 

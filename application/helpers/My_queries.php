@@ -29,6 +29,7 @@ require_once 'application/core/database.php';
     // Les requêtes dont définies dans un fichier de configuration
     // (voir le constructeur pour les détails)
     global $queries;
+    $pdo = get_pdo();
 
     // On récupère la requête brute, avec des :champs dedans
     if (!isset($queries[$name])){
@@ -64,7 +65,6 @@ require_once 'application/core/database.php';
         return null; //show_error("requete absente : $name");
       }
       // On exécute la requête modifiée, en passant le tableau de paramètres
-      $pdo = get_pdo();
 
       try {
         $query = $pdo->prepare($sql_query);

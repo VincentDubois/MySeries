@@ -21,7 +21,7 @@
 #   new           le nombre d épisodes sortis (optionnel)
 
 # Décommentez la ligne suivante, qui répond à la première partie de la question :
-# SELECT * FROM serie ORDER BY serie.premiere DESC;
+# giSELECT * FROM serie ORDER BY serie.premiere DESC;
 
 
 ################################ Page Catégories ###############################

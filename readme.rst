@@ -26,65 +26,42 @@ Il y a deux options :
 
 - Sous windows : installation via un programme à télécharger
 - En ligne de commande (toutes machines) : l'installation se fait par des
-  commandes en php (copier/coller chaque ligne séparément)
+  commandes en php (copier/coller chaque ligne séparément). la version de php en ligne de
+  commande doit correspondre à la version affichée dans le navigateur (localhost, cherchez
+  phpInfo ou dans phpMyAdmin).
 
 Vous devez disposer d'un accès à une base de données MySQL (déjà créée) qui contiendra les
-séries. Pour remplir la base, vous pouvez importer le fichier tvshows.sql si ce
-n'est pas déjà fait. On suppose donc dans la suite qu'un LAMP, MAMP ou WAMP est disponible
+séries. Si elle n'existe pas déjà il faut la créer puis la remplir avec le fichier tvshows.sql.
+On suppose donc dans la suite qu'un Apache (LAMP, MAMP ou WAMP) est disponible.
 
 ************
 Installation
 ************
 
-Si les fichiers sont récupérés sous forme d'archive, il faut l'extraire. Ensuite,
-à partir du répertoire racine du projet (celui contenant ce fichier d'aide) il
-faut installer le projet avec composer::
+1) Si les fichiers sont récupérés sous forme d'archive, il faut l'extraire. Pour l'hébergement
+   sous Apache, il faut déplacer le répertoire  (celui contenant ce fichier d'aide) sous htdocs ou www 
+   (votre documentRoot).
+
+2) Ensuite, à partir du répertoire racine du projet il faut installer le projet avec composer::
 
   composer install
   # ou
   php composer.phar install
+  # composer.phar est supposé être dans le répertoire courant. Ajoutez le chemin au besoin
 
-Il faut ensuite adapter le contenu de application/config/config.php à votre configuration de
-base de données et à l'url du site.
+3) Donnez les droits de modification à Apache pour le répertoire 'public/img'
+   ainsi que'au répertoire application/view/cache.
+   Cela est nécessaire pour que les images soient récupérées et cachées en local, et pour blade. Par
+   exemple sous bash ::
 
-Sur les machines de l'iut, les informations utiles peuvent être obtenues avec la commande suivante::
+     chmod -R a+w public/img application/view/cache
+
+4) Il faut ensuite adapter le contenu dans application/config/config.php à votre configuration de
+  base de données et à l'url du site (Voir les commentaires dans ce fichier).
+
+  Sur les machines de l'iut, les informations utiles peuvent être obtenues avec la commande suivante::
 
   cat ~/.my.cnf
-
-Les deux principales options pour faire tourner le site sont la ligne de commande (php -S)
-et l'hébergement.
-
-Dans le premier cas, à partir de la racine du projet, on utilise php pour servir le
-site::
-
-  php -S 127.0.0.1:8000
-
-Normalement, on peut ensuite l'ouvrir dans un navigateur à cette addresse
-( 127.0.0.1:8000 )
-
-
-***********
-Hébergement
-***********
-
-
-Si vous ne disposez pas de php en ligne de commande ou si vous voulez un hébergement plus permanent,
-il est possible d'utiliser votre serveur web (en local ou chez un hébergeur). Pour cela il faut :
-
-1) Vérifier que le répertoire contenant le site est placé dans votre 'documentRoot' ou 'htdocs'
-   (ou /var/www/ sous Linux), le déplacer si nécessaire. Par défaut, le site est dans un répertoire
-   MySeries.
-
-2) Editez dans le fichier application/config/config.php le chemin d'installatin
-
-3) Donnez la propriété et/ou les droits de modification à Apache pour le répertoire 'public' et ses
-   sous-répertoires, ainsi que'au répertoire application/view/cache.
-   Cela est nécessaire pour que les images soient récupérées et cachées en local, et pour blade. Par
-   exemple sous Linux
-
-::
-
-     chown -R www-data:www-data public applocation/view/cache
 
 *********************
 Ecriture des requêtes

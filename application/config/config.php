@@ -7,27 +7,21 @@
 //   DB_HOST : 127.0.0.1
 //   DB-NAME : nom de la base que vous utilisez
 //   DB_LOGIN : root
-//   DB_PASSWORD : rien ou root
+//   DB_PASSWORD : rien ou root (sous MAMP)
 // - sur les pc des salles TP : voir ~/.my.cnf
-// - sur la machine 172.31.144.142 :
-//   DB_HOST : 127.0.0.1
-//   DB_LOGIN : groupe_xx
-//   DB_NAME : groupe_xx
-//   DB_PASSWORD : le mot de passe qui vous a été fourni
-define('DB_HOST', '127.0.0.1');
-define('DB_NAME', 'sae'); // nom de la base
-define('DB_LOGIN', 'sae'); // login (nom de l'utilisateur)
-define('DB_PASSWORD', 'password');
 
+define('DB_HOST', '127.0.0.1');
+define('DB_NAME', 'tvshwows'); // nom de la base
+define('DB_LOGIN', 'root'); // login (nom de l'utilisateur)
+define('DB_PASSWORD', ''); // mot de passe
 
 // BASE_URL définit le chemin vers index.php (dans le navigateur)
 // Adaptez-le au chemin vers le site dans votre navigateur
 // exemples :
 // - avec php -S lancé dans le répertoire du projet
-//       URL dans le navigateur : http://127.0.0.1:8000/
+//       URL dans le navigateur : http://127.0.0.1/MySeries/
 // - hébergement sur la machine sae : 
-//       URL dans le navigateur : http://172.31.144.142/~groupe_xx/
-define('BASE_URL',"http://127.0.0.1:8000/");
+define('BASE_URL',"http://127.0.0.1/MySeries/");
 
 //Rien à changer au dessous de cette ligne
 
