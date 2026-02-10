@@ -44,10 +44,10 @@ Installation
 
 2) Ensuite, à partir du répertoire racine du projet il faut installer le projet avec composer::
 
-  composer install
-  # ou
-  php composer.phar install
-  # composer.phar est supposé être dans le répertoire courant. Ajoutez le chemin au besoin
+	  composer install
+	  # ou
+	  php composer.phar install
+	  # composer.phar est supposé être dans le répertoire courant. Ajoutez le chemin au besoin
 
 3) Donnez les droits de modification à Apache pour le répertoire 'public/img'
    ainsi que'au répertoire application/view/cache.
@@ -57,11 +57,11 @@ Installation
      chmod -R a+w public/img application/view/cache
 
 4) Il faut ensuite adapter le contenu dans application/config/config.php à votre configuration de
-  base de données et à l'url du site (Voir les commentaires dans ce fichier).
+   base de données et à l'url du site (Voir les commentaires dans ce fichier).
 
-  Sur les machines de l'iut, les informations utiles peuvent être obtenues avec la commande suivante::
-
-  cat ~/.my.cnf
+   Sur les machines de l'iut, les informations utiles peuvent être obtenues avec la commande suivante::
+	
+	  cat ~/.my.cnf
 
 *********************
 Ecriture des requêtes
