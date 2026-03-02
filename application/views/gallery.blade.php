@@ -6,7 +6,7 @@
   <div class="panel-body">
    @foreach ($categories as $tag)
      <a href="{!!url_page('category',$tag)!!}">
-       <span class="label label-rounded m-1 {{ $tag['nom'] == $current_cat ? "label-primary" : "label-secondary" }} ">
+       <span class="label label-rounded m-1 {{ $tag['nom'] == ($current_cat ?? NULL) ? "label-primary" : "label-secondary" }} ">
        {{$tag['nom'].' ('.$tag['count'].') '}}</span></a>
    @endforeach
   </div>
