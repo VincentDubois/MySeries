@@ -40,8 +40,8 @@ $description_saison = "";
 if ($debut != 0){
         $nb = $current_season['nb'] ?? 0;
         $description_saison .= substr($debut,0,4).' ('.$nb.' episodes)';
-        if (isset($saison['total'])) {
-                $total = explode(':',$saison['total']);
+        if (isset($current_season['total'])) {
+                $total = explode(':',$current_season['total']);
                 $heures = $total[0]+0;
                 $minutes = $total[1]+0;
                 $description_saison .= " $heures heures $minutes minutes";
